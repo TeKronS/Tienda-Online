@@ -5,9 +5,55 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    /* height: 100%; */
+    overflow-y: scroll;
+    font-family: system-ui;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.box {
+  box-sizing: border-box;
+  box-shadow: 1px -1px 5px -1px #275a46;
+  border-radius: 4px;
+}
+
+.visible {
+  display: block !important;
+}
+
+
+/* .desplegeFilter {
+  width: 200px !important;
+  height: calc(100vh - 140px) !important;
+} */
+
+.desplegeFilter svg {
+  transform: rotateY(0deg) !important;
+}
+
+@media screen and (max-width: 600px) {
+  .desplegeFilter {
+    height: 32px !important;
+    width: 32px !important;
+  }
+  .desplegeFilter .relleno {
+    height: 0 !important;
+    width: 0 !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .menu {
+    transform: scale(0) !important;
+  }
+}
+
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+  touch-action: none;
 }
