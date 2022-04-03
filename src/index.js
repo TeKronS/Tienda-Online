@@ -4,12 +4,12 @@ import "./index.css";
 import { ShopApp } from "./ShopApp";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-
+import { BrowserRouter as Router } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <Router>
     <ShopApp />
-  </React.StrictMode>
+  </Router>
 );
 
 // If you want your app to work offline and load faster, you can change

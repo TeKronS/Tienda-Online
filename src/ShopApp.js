@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BodyShop, Body } from "./Styles/stylesComponents";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Header } from "./header/Header";
 import { Home } from "./pages/home/Home";
 import { Footer } from "./footer/footer";
@@ -43,45 +43,43 @@ export const ShopApp = () => {
 
   //----------------------------------
   return (
-    <Router>
-      <Body>
-        <Header user={user} logOut={logOut} />
-        <BodyShop>
-          <Switch>
-            <Route path="/SingIn">
-              <Registration user={user} />
-              <Footer />
-            </Route>
-            <Route path="/LogIn">
-              <Login logIn={logIn} userLogin={user} />
-              <Footer />
-            </Route>
-            <Route path="/Profile">
-              <Profile user={{ data: user, setState: setUser }} />
-              <Footer />
-            </Route>
-            <Route path="/RestorePass">
-              <RestorePassPage user={user} />
-              <Footer />
-            </Route>
-            <Route path="/Sell">
-              <SellForm user={user} />
-              <Footer />
-            </Route>
-            <Route path="/Sales/:docId">
-              <SaleDoc user={user} />
-              <Footer />
-            </Route>
-            <Route path="/Sales">
-              <SerchSales user={user} />
-            </Route>
-            <Route path="/">
-              <Home user={user} />
-              <Footer />
-            </Route>
-          </Switch>
-        </BodyShop>
-      </Body>
-    </Router>
+    <Body>
+      <Header user={user} logOut={logOut} />
+      <BodyShop>
+        <Switch>
+          <Route path="/SingIn">
+            <Registration user={user} />
+            <Footer />
+          </Route>
+          <Route path="/LogIn">
+            <Login logIn={logIn} userLogin={user} />
+            <Footer />
+          </Route>
+          <Route path="/Profile">
+            <Profile user={{ data: user, setState: setUser }} />
+            <Footer />
+          </Route>
+          <Route path="/RestorePass">
+            <RestorePassPage user={user} />
+            <Footer />
+          </Route>
+          <Route path="/Sell">
+            <SellForm user={user} />
+            <Footer />
+          </Route>
+          <Route path="/Sales/:docId">
+            <SaleDoc user={user} />
+            <Footer />
+          </Route>
+          <Route path="/Sales">
+            <SerchSales user={user} />
+          </Route>
+          <Route path="/">
+            <Home user={user} />
+            <Footer />
+          </Route>
+        </Switch>
+      </BodyShop>
+    </Body>
   );
 };
