@@ -7,7 +7,7 @@ import {
   doc,
   getDocs,
   updateDoc,
-  arrayUnion
+  arrayUnion,
 } from "firebase/firestore/lite";
 //-------------------------------------
 
@@ -20,7 +20,6 @@ export async function findDataUser(user, signOuts) {
   try {
     if (docSnap.exists()) {
       const dataUser = { ...docSnap.data(), ...user };
-      console.log(3);
       return dataUser;
     } else {
       console.log("No such document!");
@@ -56,9 +55,11 @@ export async function findHiddenUserData(user) {
 export async function setSales(data) {
   const ventaRef = collection(db, "Ventas");
   try {
-    const docRef = await addDoc(ventaRef, data);
-    addItemsForSale(data.uid, docRef.id);
-    return docRef;
+    const doc = await addDoc(ventaRef, data);
+
+    addItemsForSale(data.uid, doc.id);
+    addTitleForSerch(doc.id, data.title);
+    return doc;
   } catch (e) {
     console.log("Error adding document: ", e);
     return null;
@@ -68,8 +69,12 @@ export async function setSales(data) {
 async function addItemsForSale(document, item) {
   const userRef = doc(db, "Usuarios", document);
   await updateDoc(userRef, {
-    itemsForSale: arrayUnion(item)
+    itemsForSale: arrayUnion(item),
   });
+}
+async function addTitleForSerch(id, title) {
+  const userRef = doc(db, "TitlesForSerch", id);
+  await setDoc(userRef, { title: title });
 }
 //-----Registro-------------------------------------
 export async function setDataUser(userData, uid, redirect) {
@@ -85,8 +90,8 @@ export async function setDataUser(userData, uid, redirect) {
       1: ["pc", "laptop"],
       2: ["pc", "laptop"],
       3: ["pc", "laptop"],
-      4: ["pc", "laptop"]
-    }
+      4: ["pc", "laptop"],
+    },
   };
 
   const hiddenData = { phone: userData.phone };
@@ -139,7 +144,6 @@ export async function findDataSales(saleDoc, setState, user) {
   if (!saleDoc) {
     return;
   }
-  console.log("111");
   const docRef = doc(db, "Ventas", saleDoc);
   const docSnap = await getDoc(docRef);
   try {
@@ -159,7 +163,7 @@ function addVisits(document, user) {
   const saleRef = doc(db, "Ventas", document);
   const userRef = doc(db, "Usuarios", user);
   updateDoc(saleRef, {
-    visits: arrayUnion(user)
+    visits: arrayUnion(user),
   });
   updateDoc(userRef, { "recientViews.0": ["categoria", "sub"] });
 }
