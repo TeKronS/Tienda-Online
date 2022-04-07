@@ -3,33 +3,33 @@ export const categorys = {
     id: "Electrodomesticos",
     coccion: "Cocción",
     lavado: "Lavado",
-    refrigeracion: "Refrigeración"
+    refrigeracion: "Refrigeración",
   },
   celularesYTelefonos: {
     id: "Celulares y Teléfonos",
     accesoriosParaCelulares: "Accesorios para Celulares",
     celularesYSmartphones: "Celulares y Smartphones",
-    repuestosParaCelulares: "Repuestos para Celulares"
+    repuestosParaCelulares: "Repuestos para Celulares",
   },
   accesoriosParaVehiculos: {
     id: "Accesorios para Vehículos",
     cauchos: "Cauchos",
     performance: "Performance",
     audioParaVehículos: "Audio para Vehículos",
-    rines: "Rines"
+    rines: "Rines",
   },
   bebes: {
     id: "Bebes",
     corrales: "Corrales",
     comidaParaBebes: "Comida para Bebés",
-    juguetesParaBebes: "Jueges para Bebés"
+    juguetesParaBebes: "Juguetes para Bebés",
   },
   camaras: {
     id: "Camaras",
     accesoriosParacamaras: "Accesorios para Cámaras",
     lentesYFiltros: "Lentes y Filtros",
     cables: "Cables",
-    videoCamaras: "Video Cámaras"
+    videoCamaras: "Video Cámaras",
   },
   computacion: {
     id: "Computación",
@@ -37,7 +37,16 @@ export const categorys = {
     accesorios: "Accesorios",
     software: "Software",
     pcEscritorio: "Pc de Escritorio",
-    laptop: " Laptops",
-    cables: "Cables USB"
-  }
+    laptop: " Laptop",
+    cables: "Cables USB",
+  },
+  muebles: {
+    id: "Muebles",
+    alfombra: "Alfombra",
+    sofa: "Sofa",
+    mesa: "Mesa",
+    escritorio: "Escritorio",
+    escaparate: " Escaparate",
+    silla: "Silla",
+  },
 };
