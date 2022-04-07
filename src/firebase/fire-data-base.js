@@ -129,16 +129,17 @@ export async function setDataUser(userData, uid, redirect) {
     });
 }
 //----------------------------------------
-export async function findSells(user, setState) {
-  const collectionRef = collection(db, "Ventas");
+export async function getCollection(name) {
+  const collectionRef = collection(db, name);
   try {
     const querySnapshot = await getDocs(collectionRef);
-    setState(querySnapshot.docs);
+    return querySnapshot.docs;
   } catch (e) {
     console.error("Error adding document: ", e);
     return null;
   }
 }
+
 //----------------------------------
 export async function findDataSales(saleDoc, setState, user) {
   if (!saleDoc) {

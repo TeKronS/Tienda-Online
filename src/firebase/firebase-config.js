@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   signOut,
   createUserWithEmailAndPassword,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 import { setDataUser, findDataUser } from "./fire-data-base";
@@ -18,7 +18,7 @@ const firebaseConfig = {
   storageBucket: "sesion-tienda-online.appspot.com",
   messagingSenderId: "753606061151",
   appId: "1:753606061151:web:c423d9106370e45d5b3fea",
-  measurementId: "G-6LMSET4H74"
+  measurementId: "G-6LMSET4H74",
 };
 
 // Initialize Firebase----------------------
@@ -35,7 +35,7 @@ function mapUserFromFirebaseAuth(user) {
     uid: data.uid,
     displayName: data.displayName,
     email: data.email,
-    photoURL: data.photoURL
+    photoURL: data.photoURL,
   };
   return usuario;
 }
@@ -88,7 +88,7 @@ function addData(userData, uid, redirect) {
   updateProfile(auth.currentUser, {
     displayName: userData.name,
     photoURL:
-      "https://static.vecteezy.com/system/resources/thumbnails/000/550/980/small/user_icon_001.jpg"
+      "https://static.vecteezy.com/system/resources/thumbnails/000/550/980/small/user_icon_001.jpg",
   })
     .then((ress) => {
       setDataUser(userData, uid, redirect);
