@@ -172,12 +172,12 @@ export const SellForm = ({ user }) => {
         return null;
       }
     }
-    const physicalStore = user.physicalStore ? true : false;
-    if (!imageState.current[0] && user) {
+    const physicalStore = user.data.physicalStore ? true : false;
+    if (!imageState.current[0] && user.data) {
       return {
         ...content.current,
-        uid: user.uid,
-        city: user.city,
+        uid: user.data.uid,
+        city: user.data.city,
         visits: [],
         physicalStore,
       };
@@ -186,16 +186,33 @@ export const SellForm = ({ user }) => {
   //---
   async function onSubmit(e) {
     e.preventDefault();
+    boxButton.current.children[1].style.opacity = "0.5";
+    boxButton.current.children[1].style.pointerEvents = "none";
     const venta = formValidation();
 
     if (!venta) {
       alert("complete el formulario");
+      boxButton.current.children[1].style.opacity = "1";
+      boxButton.current.children[1].style.pointerEvents = "auto";
     } else {
+      let newItemForSale = user.data.itemsForSale;
+
+      if (newItemForSale.length > 6) {
+        alert("Limite de Publicaciones Borre Alguna Venta Publicada");
+        return;
+      }
       const send = await setSales(venta);
 
       if (send) {
+        newItemForSale.push(send.id);
+        const newData = { ...user.data, itemsForSale: newItemForSale };
+        user.setState(newData);
+        alert("Articulo Publicado");
         reset(e);
       } else {
+        boxButton.current.children[1].style.opacity = "1";
+        boxButton.current.children[1].style.pointerEvents = "auto";
+
         alert("no se logro enviar, intente de nuevo");
       }
     }
@@ -217,12 +234,20 @@ export const SellForm = ({ user }) => {
     ReLoad(load + 1);
   }
   //-------------------------------
+  function enterPress(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (boxButton.current.children[2].style.opacity === "1") {
+        deslizarFormulario(-100);
+      }
+    }
+  }
   return (
     <Body>
       <h2>Agrega Articulo para la Venta</h2>
       <Form key={load} className={"box"}>
         <SliderBox ref={sliderBox} style={{ transform: "translate(0%)" }}>
-          <BoxTitle>
+          <BoxTitle onKeyPress={enterPress}>
             <Label>Titulo</Label>
             <Input
               placeholder={"Titulo"}
@@ -245,9 +270,9 @@ export const SellForm = ({ user }) => {
             />
           </BoxDescription>
 
-          <PriceComponent priceChanged={priceChanged} />
+          <PriceComponent priceChanged={priceChanged} keyPress={enterPress} />
 
-          <BoxAmount>
+          <BoxAmount onKeyPress={enterPress}>
             <Label>Cantidad de Articulos</Label>
             <Input
               placeholder={"Cantidad"}
@@ -265,6 +290,7 @@ export const SellForm = ({ user }) => {
             isEnableButtonNext={isEnableButtonNext}
             quality={0.6}
             color={"#275a46"}
+            max={4}
           />
         </SliderBox>
 

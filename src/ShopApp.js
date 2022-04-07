@@ -64,7 +64,7 @@ export const ShopApp = () => {
             <Footer />
           </Route>
           <Route path="/Sell">
-            <SellForm user={user} />
+            <SellForm user={{ data: user, setState: setUser }} />
             <Footer />
           </Route>
           <Route path="/Sales/:docId">

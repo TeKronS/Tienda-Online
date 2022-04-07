@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BoxPrice } from "./styles";
 import { Input, Label } from "./../styles";
 
-export const PriceComponent = ({ priceChanged }) => {
+export const PriceComponent = ({ priceChanged, keyPress }) => {
   const [price, setPrice] = useState(0);
   function onPriceChanged(e) {
     const value = e.target.value;
@@ -10,7 +10,7 @@ export const PriceComponent = ({ priceChanged }) => {
     priceChanged(value);
   }
   return (
-    <BoxPrice>
+    <BoxPrice onKeyPress={keyPress}>
       <Label>Precio</Label>
       <Input placeholder={"Precio"} type={"number"} onChange={onPriceChanged} />
       {price > 0 ? (
