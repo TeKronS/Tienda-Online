@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { findSells } from "./../../firebase/fire-data-base";
+import { getCollection } from "./../../firebase/fire-data-base";
 import { FilterSection } from "./filter/FilterSection";
 import { Link } from "react-router-dom";
 import {
   ItemSerch,
   SalesBody,
   TextItemContainer,
-  ItemSerchImgContainer
+  ItemSerchImgContainer,
 } from "./styles";
 //------------------------
 export const SerchSales = ({ user }) => {
@@ -15,7 +15,9 @@ export const SerchSales = ({ user }) => {
   const refSerchBody = useRef(null);
 
   useEffect(() => {
-    findSells(user, setVentas);
+    getCollection("Ventas").then((result) => {
+      setVentas(result);
+    });
   }, []);
 
   //------------
@@ -30,10 +32,10 @@ export const SerchSales = ({ user }) => {
 
       <SalesBody ref={refSerchBody}>
         {ventas ? (
-          ventas.map((doc, key) => {
+          ventas.map((doc) => {
             const data = { id: doc.id, ...doc.data() };
             return (
-              <ItemSerch key={key} className={"box"}>
+              <ItemSerch key={data.id} className={"box"}>
                 <ItemSerchImgContainer>
                   <img alt={""} src={data.imgURL[0]} height={"150"} />
                 </ItemSerchImgContainer>
