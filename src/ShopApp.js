@@ -16,13 +16,22 @@ import {
   signOuts,
   onAuthStateChangeds,
 } from "./firebase/firebase-config";
-
+import { getCollection } from "./firebase/fire-data-base";
 //------------------------------
 export const ShopApp = () => {
   const [user, setUser] = useState(null);
+  const [titles, setTitles] = useState(null);
+
   //-----------------------------------
   useEffect(() => {
     onAuthStateChangeds(setUser);
+
+    getCollection("TitlesForSerch").then(async (result) => {
+      const data = await result.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setTitles(data);
+    });
   }, []);
 
   async function logIn(email, pass) {
@@ -67,12 +76,12 @@ export const ShopApp = () => {
             <SellForm user={{ data: user, setState: setUser }} />
             <Footer />
           </Route>
-          <Route path="/Sales/:docId">
+          <Route path="/Sale/:docId">
             <SaleDoc user={user} />
             <Footer />
           </Route>
-          <Route path="/Sales">
-            <SerchSales user={user} />
+          <Route path="/Query/:docId">
+            <SerchSales titles={titles} />
           </Route>
           <Route path="/">
             <Home user={user} />
