@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { setSales } from "./../../firebase/fire-data-base";
 import { CategoryList } from "./categorySection/categoriComponent";
 import { PriceComponent } from "./priceSection/priceComponent";
@@ -18,8 +18,16 @@ import {
   ButtonSend,
   ButtonNext,
 } from "./styles";
+import { useHistory } from "react-router-dom";
+
 //-------------------------------
 export const SellForm = ({ user }) => {
+  let history = useHistory();
+  useEffect(() => {
+    if (!user.data) history.push("/LogIn");
+  }, [user]);
+
+  //------------------
   const [load, ReLoad] = useState(0);
   //---
   const imageState = useRef(["null"]);

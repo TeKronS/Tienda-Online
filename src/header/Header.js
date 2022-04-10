@@ -11,7 +11,7 @@ import {
   BoxUser,
   NavigationBarr,
   Options,
-  UserImg
+  UserImg,
 } from "./styles";
 import logo from "./../img/LOGO.png";
 //----------------------------------------------
@@ -96,9 +96,8 @@ export const Header = ({ user, logOut }) => {
         )}
       </UserSection>
       <NavigationBarr>
-        <Link to="/Sell">VENDER</Link>
+        {user && <Link to="/Sell">VENDER</Link>}
         <Link to="/">HOME</Link>
-        <Link to="/Sales">VENTAS</Link>
       </NavigationBarr>
     </HeaderShop>
   );
