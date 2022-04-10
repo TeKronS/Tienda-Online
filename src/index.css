@@ -25,12 +25,6 @@ code {
   display: block !important;
 }
 
-
-/* .desplegeFilter {
-  width: 200px !important;
-  height: calc(100vh - 140px) !important;
-} */
-
 .desplegeFilter svg {
   transform: rotateY(0deg) !important;
 }
