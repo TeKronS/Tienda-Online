@@ -17,7 +17,7 @@ import logo from "./../img/LOGO.png";
 //----------------------------------------------
 export const Header = ({ user, logOut }) => {
   const refHeader = useRef(null);
-  const refUser = useRef(null);
+  const refBoxUser = useRef(null);
   useEffect(() => {
     refHeader.current.style.top = "0px";
     let prevScrollpos = window.pageYOffset;
@@ -29,7 +29,7 @@ export const Header = ({ user, logOut }) => {
         const scroll = prevScrollpos - currentScrollPos;
         const newTop = headerTop + scroll;
         if (prevScrollpos < currentScrollPos) {
-          refUser.current.classList.add("menu");
+          refBoxUser.current.classList.add("menu");
           if (newTop <= -130) {
             refHeader.current.style.top = `-130px`;
           } else {
@@ -52,16 +52,20 @@ export const Header = ({ user, logOut }) => {
       window.removeEventListener("scroll", scrolin);
     };
   }, []);
-  function burgerClick(setDesplege) {
-    if (refUser.current.classList.contains("menu")) {
-      refUser.current.classList.remove("menu");
+  function burgerClick() {
+    if (refBoxUser.current.classList.contains("menu")) {
+      refBoxUser.current.classList.remove("menu");
     } else {
-      refUser.current.classList.add("menu");
+      refBoxUser.current.classList.add("menu");
     }
   }
   function menuHidde(e) {
     const target = e.target.tagName;
-    if (target === "A") refUser.current.classList.add("menu");
+    if (target === "A") refBoxUser.current.classList.add("menu");
+  }
+
+  function leaveBoxUser() {
+    refBoxUser.current.classList.add("menu");
   }
   return (
     <HeaderShop id={"header"} ref={refHeader}>
@@ -72,15 +76,15 @@ export const Header = ({ user, logOut }) => {
       </Logo>
       <SerchBarrComponent />
 
-      <UserSection onClick={menuHidde}>
+      <UserSection onMouseLeave={leaveBoxUser} onClick={menuHidde}>
         <BurgerComponent burgerClick={burgerClick} />
         {!user ? (
-          <ButonLogin ref={refUser} className={"menu"}>
+          <ButonLogin ref={refBoxUser} className={"menu"}>
             <Link to="/LogIn">Iniciar</Link>
             <Link to="/SingIn">Registrarse</Link>
           </ButonLogin>
         ) : (
-          <BoxUser ref={refUser} className={"menu"}>
+          <BoxUser ref={refBoxUser} className={"menu"}>
             <Options>
               <Link to="/Profile">Perfil</Link>
               <Link onClick={logOut} to="/Sales">

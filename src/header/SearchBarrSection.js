@@ -19,7 +19,10 @@ export const SerchBarrComponent = () => {
 
   function enterPress(e) {
     if (query) {
-      if (e.key === "Enter") serch();
+      if (e.key === "Enter") {
+        e.target.blur();
+        serch();
+      }
     }
   }
 

@@ -29,6 +29,9 @@ export const HeaderShop = styled.header`
   }
   @media screen and (max-width: 600px) {
     grid-template-columns: 80px 1fr 50px;
+    .menu {
+      transform: scale(0) !important;
+    }
   }
   @media screen and (max-height: 400px) {
     position: absolute;
@@ -58,7 +61,7 @@ export const SearchBarrSection = styled.section`
   margin: 0 10px 20px;
 
   input {
-    border: none;
+    border: 1px white solid;
     border-radius: 2px;
     width: 80%;
     max-width: 500px;
@@ -67,7 +70,7 @@ export const SearchBarrSection = styled.section`
   }
   button {
     margin: 0;
-    height: 36px;
+    height: 38px;
   }
 `;
 
@@ -111,6 +114,7 @@ export const BoxUser = styled.div`
     box-shadow: 1px -1px 5px -1px #275a46;
   }
 `;
+
 export const BurgerBox = styled.div`
   display: none;
   height: 100%;
@@ -132,6 +136,7 @@ export const BurgerBox = styled.div`
     display: flex;
   }
 `;
+
 export const UserImg = styled.div`
   display: flex;
   align-items: center;
@@ -180,9 +185,11 @@ export const NavigationBarr = styled.nav`
   box-shadow: 1px -1px 5px -1px #275a46;
   justify-content: center;
   a {
+    box-shadow: 2px 1px 5px 1px #275a46;
     margin: auto 7px;
+    height: 28px;
     padding: 0px 7px;
-    line-height: 30px;
+    line-height: 31px;
   }
 `;
 
