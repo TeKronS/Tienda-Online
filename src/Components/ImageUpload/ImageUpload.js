@@ -211,6 +211,7 @@ export const ImageComponent = ({
       </Label>
       {max > 1 ? (
         <Input
+          tabIndex={"-1"}
           key={keyState}
           id={"fotos"}
           type={"file"}
@@ -222,6 +223,7 @@ export const ImageComponent = ({
         />
       ) : (
         <Input
+          tabIndex={"-1"}
           key={keyState}
           id={"fotos"}
           type={"file"}
@@ -238,16 +240,6 @@ export const ImageComponent = ({
         color={color}
       />
     </SectionImg>
-  );
-};
-
-const ImageChild = () => {
-  return (
-    <div>
-      <iframe title={"ads"} className={"spinner"} />
-      <img alt={""} />
-      <button type={"button"}>X</button>
-    </div>
   );
 };
 

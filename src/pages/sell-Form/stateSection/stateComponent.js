@@ -14,6 +14,7 @@ export const StateComponent = ({ stateChanged }) => {
         <State className={"box"} onClick={handleClick}>
           <label htmlFor={"Nuevo"}>Nuevo</label>
           <input
+            tabIndex={"-1"}
             id={"Nuevo"}
             name={"estado"}
             type={"radio"}
@@ -23,6 +24,7 @@ export const StateComponent = ({ stateChanged }) => {
         <State className={"box"} onClick={handleClick}>
           <label htmlFor={"Usado"}>Usado</label>
           <input
+            tabIndex={"-1"}
             id={"Usado"}
             name={"estado"}
             type={"radio"}

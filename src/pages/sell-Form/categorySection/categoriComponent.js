@@ -6,7 +6,7 @@ import {
   CategoryItem,
   SubCategorysBox,
   SubCategoryItem,
-  Label
+  Label,
 } from "./styles";
 //---------------------------------
 export const CategoryList = ({ setCategoryandSub, isEnableButtonNext }) => {
@@ -107,7 +107,7 @@ function mainCategory() {
   for (let key in categorys) {
     category.push(
       <CategoryItem key={key}>
-        <button id={key} type={"button"}>
+        <button tabIndex={"-1"} id={key} type={"button"}>
           <span style={{ pointerEvents: "none" }}>
             <b>{categorys[key].id}</b>
           </span>

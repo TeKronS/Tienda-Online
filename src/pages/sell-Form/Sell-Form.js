@@ -253,11 +253,12 @@ export const SellForm = ({ user }) => {
   return (
     <Body>
       <h2>Agrega Articulo para la Venta</h2>
-      <Form key={load} className={"box"}>
+      <Form tabIndex={"-1"} key={load} className={"box"}>
         <SliderBox ref={sliderBox} style={{ transform: "translate(0%)" }}>
           <BoxTitle onKeyPress={enterPress}>
-            <Label>Titulo</Label>
+            <Label tabIndex={"-1"}>Titulo</Label>
             <Input
+              tabIndex={"-1"}
               placeholder={"Titulo"}
               type={"text"}
               onChange={titleChanged}
@@ -272,6 +273,7 @@ export const SellForm = ({ user }) => {
           <BoxDescription>
             <Label>Descripción</Label>
             <textarea
+              tabIndex={"-1"}
               className={"box"}
               placeholder={"Descripción"}
               onChange={descriptionChanged}
@@ -283,6 +285,7 @@ export const SellForm = ({ user }) => {
           <BoxAmount onKeyPress={enterPress}>
             <Label>Cantidad de Articulos</Label>
             <Input
+              tabIndex={"-1"}
               placeholder={"Cantidad"}
               type={"number"}
               onChange={amountChanged}

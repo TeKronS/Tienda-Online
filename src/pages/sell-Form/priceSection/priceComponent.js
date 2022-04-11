@@ -12,7 +12,12 @@ export const PriceComponent = ({ priceChanged, keyPress }) => {
   return (
     <BoxPrice onKeyPress={keyPress}>
       <Label>Precio</Label>
-      <Input placeholder={"Precio"} type={"number"} onChange={onPriceChanged} />
+      <Input
+        tabIndex={"-1"}
+        placeholder={"Precio"}
+        type={"number"}
+        onChange={onPriceChanged}
+      />
       {price > 0 ? (
         <p> El precio sera de ( {price} USD ) por Unidad </p>
       ) : (
