@@ -60,7 +60,7 @@ export const ShopApp = () => {
             <Registration user={user} />
             <Footer />
           </Route>
-          <Route path="/LogIn">
+          <Route path="/Login">
             <Login logIn={logIn} userLogin={user} />
             <Footer />
           </Route>

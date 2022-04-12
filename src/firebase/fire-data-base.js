@@ -77,7 +77,7 @@ async function addTitleForSerch(id, title) {
   await setDoc(userRef, { title: title });
 }
 //-----Registro-------------------------------------
-export async function setDataUser(userData, uid, redirect) {
+export async function setDataUser(userData, uid) {
   const visibleData = {
     userName: userData.userName,
     city: userData.city,
@@ -96,37 +96,20 @@ export async function setDataUser(userData, uid, redirect) {
 
   const hiddenData = { phone: userData.phone };
 
-  await setDoc(doc(db, "Usuarios", `${uid}`), visibleData)
+  return setDoc(doc(db, "Usuarios", `${uid}`), visibleData)
     .then(() => {
-      setDoc(doc(db, "Usuarios", `${uid}`, "HiddenUserData", "0"), hiddenData)
+      return setDoc(
+        doc(db, "Usuarios", `${uid}`, "HiddenUserData", "0"),
+        hiddenData
+      )
         .then(() => {
-          console.log("antes user Guargado");
-          redirect();
+          return setDoc(doc(db, "UserName", `${userData.userName}`), {
+            uid: uid,
+          });
         })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode);
-          alert(errorMessage);
-        });
+        .catch(error);
     })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
-    });
-
-  setDoc(doc(db, "UserName", `${userData.userName}`), { uid: uid })
-    .then(() => {
-      console.log("user Guargado");
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
-    });
+    .catch(error);
 }
 //----------------------------------------
 export async function getCollection(name) {
@@ -196,3 +179,11 @@ export const updateHiddeData = ({ uid, data }) => {
   const userRef = doc(db, "Usuarios", uid, "HiddenUserData", "0");
   return updateDoc(userRef, data);
 };
+
+function error(error) {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(errorCode);
+  alert(errorMessage);
+  return null;
+}

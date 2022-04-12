@@ -7,10 +7,10 @@ import { ItemsForSale } from "./itemsForSale/itemsForSale";
 export const Profile = ({ user }) => {
   const [hiddeData, setHiddeData] = useState({
     phone: "",
-    direcction: ""
+    direcction: "",
   });
   let history = useHistory();
-  if (!user.data) history.push("/Sales");
+  if (!user.data) history.push("/Login");
   useEffect(() => {
     findHiddenUserData(user.data).then((response) => {
       setHiddeData({ ...hiddeData, ...response });

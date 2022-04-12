@@ -46,13 +46,7 @@ export function signInWithEmailAndPasswords(email, password) {
       const usuario = mapUserFromFirebaseAuth(res);
       return findDataUser(usuario, signOuts);
     })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
-      return null;
-    });
+    .catch(error);
 }
 //-----Comprobar Session Activa----------------------
 export async function onAuthStateChangeds(onChange) {
@@ -70,34 +64,32 @@ export function signOuts() {
 }
 //-----Registro----------------------
 
-export function RegisterWithEmailAndPass(email, pass, userData, redirect) {
-  createUserWithEmailAndPassword(auth, email, pass)
+export function RegisterWithEmailAndPass(email, pass, userData) {
+  return createUserWithEmailAndPassword(auth, email, pass)
     .then((res) => {
-      addData(userData, res.user.uid, redirect);
+      return addData(userData, res.user.uid);
     })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
-    });
+    .catch(error);
 }
 
-function addData(userData, uid, redirect) {
+function addData(userData, uid) {
   const auth = getAuth();
-  updateProfile(auth.currentUser, {
+  return updateProfile(auth.currentUser, {
     displayName: userData.name,
     photoURL:
       "https://static.vecteezy.com/system/resources/thumbnails/000/550/980/small/user_icon_001.jpg",
   })
-    .then((ress) => {
-      setDataUser(userData, uid, redirect);
+    .then(() => {
+      return setDataUser(userData, uid);
     })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
-    });
+    .catch(error);
 }
 //------------
+
+function error(error) {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(errorCode);
+  alert(errorMessage);
+  return null;
+}

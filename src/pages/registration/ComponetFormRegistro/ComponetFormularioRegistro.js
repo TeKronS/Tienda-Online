@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   BodyInputRegistro,
   Formulario,
@@ -7,7 +7,7 @@ import {
   ContenedorBotonCentrado,
   Boton,
   MensajeExito,
-  MensajeError
+  MensajeError,
 } from "./StylesElementRegistro.js";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,7 @@ const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
   password: /^.{6,12}$/, // 6 a 12 digitos.
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-  telefono: /^\++?\d{9,14}$/ // 9 a 14 numeros.
+  telefono: /^\++?\d{9,14}$/, // 9 a 14 numeros.
 };
 //---
 export const RegistrationForm = ({ user }) => {
@@ -31,8 +31,11 @@ export const RegistrationForm = ({ user }) => {
   }
   //---
   function redirect() {
-    history.push("/Sales");
+    history.push("/Login");
   }
+  //--
+  const refButtom = useRef(null);
+  //--
   const [nombre, setNombre] = useState({ campo: "", valido: null });
   const [apellido, setApellido] = useState({ campo: "", valido: null });
   const [correo, setCorreo] = useState({ campo: "", valido: null });
@@ -73,32 +76,47 @@ export const RegistrationForm = ({ user }) => {
       ciudad.valido === "true" &&
       terminos
     ) {
-      RegisterWithEmailAndPass(
-        correo.campo,
-        password.campo,
-        {
-          name: `${nombre.campo} ${apellido.campo}`,
-          userName: usuario.campo,
-          phone: telefono.campo,
-          city: ciudad.campo
-        },
-        redirect
-      );
+      RegisterWithEmailAndPass(correo.campo, password.campo, {
+        name: `${nombre.campo} ${apellido.campo}`,
+        userName: usuario.campo,
+        phone: telefono.campo,
+        city: ciudad.campo,
+      })
+        .then((response) => {
+          if (response === null) restoreButton();
+          else redirect();
+        })
+        .catch(restoreButton);
+      refButtom.current.style.opacity = "0.5";
+      refButtom.current.style.pointerEvents = "none";
 
-      setFormularioValido(true);
-      setNombre({ campo: "", valido: null });
-      setApellido({ campo: "", valido: null });
-      setCorreo({ campo: "", valido: null });
-      setUsuario({ campo: "", valido: "" });
-      setPassword({ campo: "", valido: null });
-      setPassword2({ campo: "", valido: null });
-      setTelefono({ campo: "", valido: null });
-      setCiudad({ campo: "", valido: null });
-      setTerminos(false);
+      // resetValues();
     } else {
       setFormularioValido(false);
     }
   };
+
+  function restoreButton(error) {
+    refButtom.current.style.opacity = "1";
+    refButtom.current.style.pointerEvents = "auto";
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    alert(errorMessage);
+  }
+
+  // function resetValues() {
+  //   setFormularioValido(true);
+  //   setNombre({ campo: "", valido: null });
+  //   setApellido({ campo: "", valido: null });
+  //   setCorreo({ campo: "", valido: null });
+  //   setUsuario({ campo: "", valido: "" });
+  //   setPassword({ campo: "", valido: null });
+  //   setPassword2({ campo: "", valido: null });
+  //   setTelefono({ campo: "", valido: null });
+  //   setCiudad({ campo: "", valido: null });
+  //   setTerminos(false);
+  // }
 
   return (
     <BodyInputRegistro>
@@ -206,7 +224,9 @@ export const RegistrationForm = ({ user }) => {
           </MensajeError>
         )}
         <ContenedorBotonCentrado>
-          <Boton type="submit">Enviar</Boton>
+          <Boton ref={refButtom} type="submit">
+            Registrar
+          </Boton>
           {formularioValido === true && (
             <MensajeExito>Formulario enviado exitosamente</MensajeExito>
           )}

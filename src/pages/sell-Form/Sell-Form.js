@@ -24,7 +24,7 @@ import { useHistory } from "react-router-dom";
 export const SellForm = ({ user }) => {
   let history = useHistory();
   useEffect(() => {
-    if (!user.data) history.push("/LogIn");
+    if (!user.data) history.push("/Login");
   }, [user]);
 
   //------------------

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const colores = {
   borde: "#0075FF",
   error: "#bb2929",
-  exito: "#1ed12d"
+  exito: "#1ed12d",
 };
 
 const sizeChange = "600px";
@@ -97,7 +97,7 @@ const IconoValidacion = styled(FontAwesomeIcon)`
   position: absolute;
   right: 10px;
   bottom: 14px;
-  z-index: 100;
+  z-index: 2;
   font-size: 16px;
   opacity: 0;
   ${(props) =>
@@ -184,5 +184,5 @@ export {
   ContenedorBotonCentrado,
   Boton,
   MensajeExito,
-  MensajeError
+  MensajeError,
 };
