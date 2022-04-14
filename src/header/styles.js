@@ -37,7 +37,7 @@ export const HeaderShop = styled.header`
     position: absolute;
   }
 `;
-
+//--
 export const Logo = styled.div`
   grid-area: Logo;
   margin: auto 2px auto auto;
