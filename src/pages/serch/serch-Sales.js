@@ -7,6 +7,7 @@ import {
   SalesBody,
   TextItemContainer,
   ItemSerchImgContainer,
+  NoResult,
 } from "./styles";
 //------------------------
 export const SerchSales = ({ titles }) => {
@@ -24,11 +25,18 @@ export const SerchSales = ({ titles }) => {
       async function getQuery() {
         const promises = docList.map(querySales);
         const results = await Promise.all(promises);
-
-        createListItem(results).then(setVentas);
+        createListItem(results).then((response) => {
+          if (response.length) setVentas(response);
+          else setVentas(false);
+        });
       }
 
-      if (docList) getQuery();
+      if (docList) {
+        getQuery();
+        setVentas(null);
+      } else {
+        setVentas(false);
+      }
     }
     serch();
   }, [docId, titles]);
@@ -55,6 +63,7 @@ export const SerchSales = ({ titles }) => {
                     loading={"lazy"}
                     height={"150"}
                   />
+                  <Link to={`/Sale/${data.id}`} />
                 </ItemSerchImgContainer>
 
                 <TextItemContainer>
@@ -74,11 +83,10 @@ export const SerchSales = ({ titles }) => {
                     <span>°°Envio Gratis°°</span>
                   </p>
                 </TextItemContainer>
-                <Link to={`/Sale/${data.id}`} />
               </ItemSerch>
             );
           })
-        ) : (
+        ) : ventas === null ? (
           <>
             <ItemSerch className={"box"} />
             <ItemSerch className={"box"} />
@@ -87,6 +95,8 @@ export const SerchSales = ({ titles }) => {
             <ItemSerch className={"box"} />
             <ItemSerch className={"box"} />
           </>
+        ) : (
+          <NoResult>"No se encontraron resultados"</NoResult>
         )}
       </SalesBody>
     </>
@@ -107,7 +117,8 @@ async function getListID(docId, titles) {
       });
       return newIdList;
     } else {
-      return [idList];
+      if (idList.length) return [idList];
+      else return null;
     }
   } else {
     return null;
@@ -121,15 +132,17 @@ async function filterID(keywords, titles) {
   while (i < keywords.length) {
     const serchWord = keywords[i];
     let num = 0;
-    while (num < titles.length) {
-      const titleWord = titles[num].title.toLowerCase();
-      const titleID = titles[num].id;
-      if (titleWord.includes(serchWord)) {
-        if (!idList.includes(titleID)) {
-          idList.push(titleID);
+    if (serchWord !== "") {
+      while (num < titles.length) {
+        const titleWord = titles[num].title.toLowerCase();
+        const titleID = titles[num].id;
+        if (titleWord.includes(serchWord)) {
+          if (!idList.includes(titleID)) {
+            idList.push(titleID);
+          }
         }
+        num++;
       }
-      num++;
     }
     i++;
   }

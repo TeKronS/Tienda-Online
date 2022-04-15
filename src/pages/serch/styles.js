@@ -15,6 +15,12 @@ export const SalesBody = styled.section`
   }
 `;
 
+export const NoResult = styled.h3`
+  color: red;
+  font-size: 2em;
+  text-align: center;
+`;
+
 export const ItemSerch = styled.article`
   display: grid;
   position: relative;
@@ -50,6 +56,7 @@ export const ItemSerchImgContainer = styled.div`
   width: 210px;
   height: 212px;
   background: #eff0f0;
+  position: relative;
   @media screen and (max-width: 450px) {
     height: 162px;
     width: 160px;
@@ -59,6 +66,11 @@ export const ItemSerchImgContainer = styled.div`
     object-fit: contain;
     margin: auto;
     border-radius: 3px;
+  }
+  a {
+    width: 100%;
+    height: 100%;
+    position: absolute;
   }
 `;
 
