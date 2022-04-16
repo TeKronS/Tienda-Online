@@ -9,6 +9,7 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore/lite";
+import { deleteDoc } from "firebase/firestore";
 //-------------------------------------
 
 export async function findDataUser(user, signOuts) {
@@ -186,4 +187,13 @@ function error(error) {
   console.log(errorCode);
   alert(errorMessage);
   return null;
+}
+
+export async function deleteData(collection, doc) {
+  const docRef = doc(db, collection, doc);
+  deleteDoc(docRef)
+    .then(() => {
+      console.log("ecito");
+    })
+    .catch(error);
 }
