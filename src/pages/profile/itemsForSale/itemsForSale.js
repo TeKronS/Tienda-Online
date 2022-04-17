@@ -1,38 +1,48 @@
 import { useEffect, useState } from "react";
-import { findDataSale, deleteData } from "./../../../firebase/fire-data-base";
-import { Body, Item, Img, Title } from "./styles";
-import { Link } from "react-router-dom";
+import { Body } from "./styles";
 import { querySales } from "./../../../firebase/firebase-querys";
+import { Card } from "../../../Components/cards/cardProfile/Card";
+import { deleteSell } from "./../../../firebase/fire-data-base";
 
-export const ItemsForSale = ({ items }) => {
+export const ItemsForSale = ({ user }) => {
   const [itemsForSale, setItemsForSale] = useState([]);
+
   useEffect(() => {
     let mount = true;
-    createListItemQuery(items).then((list) => {
-      querySales(list).then(async (response) => {
-        const listItem = await createListItem(response);
-        if (listItem.length && mount) setItemsForSale(listItem);
-      });
-    });
+    if (user.data.itemsForSale.length) {
+      querySales(user.data.itemsForSale)
+        .then(async (response) => {
+          const listItem = await createListItem(response);
+          if (listItem.length && mount) setItemsForSale(listItem);
+        })
+        .catch(() => {
+          setItemsForSale([]);
+        });
+    } else {
+      setItemsForSale([]);
+    }
 
     return () => {
       mount = false;
     };
-  }, []);
+  }, [user]);
+
+  async function deleteItemForSale(id) {
+    const newListItem = user.data.itemsForSale
+      .slice()
+      .filter((key) => key !== id);
+
+    deleteSell(id, user.data.uid, { itemsForSale: newListItem }).then(() => {
+      user.setState({ ...user.data, itemsForSale: newListItem });
+    });
+  }
+
   return (
     <Body>
       {itemsForSale ? (
         itemsForSale.map((doc) => {
           return (
-            <Item key={doc.id} className={"box"}>
-              <Title>
-                <Link to={`/Sale/${doc.id}`}>{doc.title}</Link>
-                <span>{doc.price} USD</span>
-              </Title>
-              <Img>
-                <img alt={""} src={doc.imgURL[0]} height={140} />
-              </Img>
-            </Item>
+            <Card deleteFunction={deleteItemForSale} doc={doc} key={doc.id} />
           );
         })
       ) : (
@@ -54,17 +64,4 @@ async function createListItem(listQuery) {
   }
 
   return sellList;
-}
-
-async function createListItemQuery(listQuery) {
-  const list = [];
-  let i = 0;
-
-  while (i < listQuery.length) {
-    const id = listQuery[i];
-    list.push(id);
-    i++;
-  }
-
-  return list;
 }

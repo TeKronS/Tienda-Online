@@ -7,21 +7,19 @@ import {
   DataDiv,
   DataSpan,
   DivText,
-  ButtonSection
+  ButtonSection,
 } from "./styles";
 import {
   updateData,
-  updateHiddeData
+  updateHiddeData,
 } from "./../../../firebase/fire-data-base";
+
 export const UserInfo = ({ user, hiddeData }) => {
   const [ifEdit, setifEdit] = useState(false);
-  // const [nombre, setNombre] = useState({
-  //   campo: user.data.displayName,
-  //   valido: null
-  // });
+
   const [usuario, setUsuario] = useState({
     campo: user.data.userName,
-    valido: null
+    valido: null,
   });
   const [ciudad, setCiudad] = useState({ campo: user.data.city, valido: null });
   const [telefono, setTelefono] = useState({
@@ -29,7 +27,7 @@ export const UserInfo = ({ user, hiddeData }) => {
       hiddeData.hiddeData.phone === "Telefono no Encontrado"
         ? ""
         : hiddeData.hiddeData.phone,
-    valido: null
+    valido: null,
   });
   const [directtion, setDirecttion] = useState({
     campo:
@@ -37,7 +35,7 @@ export const UserInfo = ({ user, hiddeData }) => {
       hiddeData.hiddeData.direcction === null
         ? ""
         : hiddeData.hiddeData.direcction,
-    valido: null
+    valido: null,
   });
   //--------------------------------
   useEffect(() => {
@@ -46,7 +44,7 @@ export const UserInfo = ({ user, hiddeData }) => {
         hiddeData.hiddeData.phone === "Telefono no Encontrado"
           ? ""
           : hiddeData.hiddeData.phone,
-      valido: null
+      valido: null,
     });
     setDirecttion({
       campo:
@@ -54,7 +52,7 @@ export const UserInfo = ({ user, hiddeData }) => {
         hiddeData.hiddeData.direcction === null
           ? ""
           : hiddeData.hiddeData.direcction,
-      valido: null
+      valido: null,
     });
   }, [hiddeData]);
   //--------------------------------
@@ -67,12 +65,12 @@ export const UserInfo = ({ user, hiddeData }) => {
   }
   const newData = {
     userName: usuario.campo,
-    city: ciudad.campo
+    city: ciudad.campo,
   };
 
   const newHiddeData = {
     phone: telefono.campo,
-    direcction: directtion.campo
+    direcction: directtion.campo,
   };
 
   const valido = [usuario.valido, ciudad.valido, telefono.valido];
@@ -80,9 +78,9 @@ export const UserInfo = ({ user, hiddeData }) => {
   async function save() {
     if (valido.indexOf("false") < 0) {
       await updateData({
-        collection: "Usuarios",
+        name: "Usuarios",
         uid: user.data.uid,
-        data: newData
+        data: newData,
       }).catch(() => {
         return;
       });
@@ -159,7 +157,7 @@ export const UserInfo = ({ user, hiddeData }) => {
                 telefono,
                 setTelefono,
                 directtion,
-                setDirecttion
+                setDirecttion,
               }}
             />
           ) : (

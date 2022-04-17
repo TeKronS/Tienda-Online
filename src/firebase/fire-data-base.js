@@ -8,8 +8,8 @@ import {
   getDocs,
   updateDoc,
   arrayUnion,
+  deleteDoc,
 } from "firebase/firestore/lite";
-import { deleteDoc } from "firebase/firestore";
 //-------------------------------------
 
 export async function findDataUser(user, signOuts) {
@@ -172,8 +172,8 @@ export async function findDataSale(saleDoc) {
   }
 }
 
-export const updateData = ({ collection, uid, data }) => {
-  const userRef = doc(db, collection, uid);
+export const updateData = ({ name, uid, data }) => {
+  const userRef = doc(db, name, uid);
   return updateDoc(userRef, data);
 };
 export const updateHiddeData = ({ uid, data }) => {
@@ -181,19 +181,20 @@ export const updateHiddeData = ({ uid, data }) => {
   return updateDoc(userRef, data);
 };
 
+export async function deleteSell(id, uid, data) {
+  const userRef = doc(db, "Usuarios", uid);
+  const docRef = doc(db, "Ventas", id);
+  const doctitlesRef = doc(db, "TitlesForSerch", id);
+  await updateDoc(userRef, data).catch(error);
+  await deleteDoc(docRef);
+  await deleteDoc(doctitlesRef);
+  return true;
+}
+
 function error(error) {
   var errorCode = error.code;
   var errorMessage = error.message;
   console.log(errorCode);
   alert(errorMessage);
   return null;
-}
-
-export async function deleteData(collection, doc) {
-  const docRef = doc(db, collection, doc);
-  deleteDoc(docRef)
-    .then(() => {
-      console.log("ecito");
-    })
-    .catch(error);
 }

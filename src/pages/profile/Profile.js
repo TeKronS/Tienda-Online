@@ -4,18 +4,23 @@ import { findHiddenUserData } from "./../../firebase/fire-data-base";
 import { UserInfo } from "./userInfo/UserInfo";
 import { ProfileSection, Title, InfoVentas } from "./styles";
 import { ItemsForSale } from "./itemsForSale/itemsForSale";
+
 export const Profile = ({ user }) => {
   const [hiddeData, setHiddeData] = useState({
     phone: "",
     direcction: "",
   });
   let history = useHistory();
-  if (!user.data) history.push("/Login");
+
   useEffect(() => {
+    if (!user.data) {
+      history.push("/Login");
+      return;
+    }
     findHiddenUserData(user.data).then((response) => {
       setHiddeData({ ...hiddeData, ...response });
     });
-  }, []);
+  }, [user]);
 
   return (
     user.data && (
@@ -32,7 +37,7 @@ export const Profile = ({ user }) => {
             <span> {(user.data.goodNote - user.data.badNote) / 2}%</span>
           </span>
         </InfoVentas>
-        <ItemsForSale items={user.data.itemsForSale} />
+        <ItemsForSale user={user} />
       </ProfileSection>
     )
   );
