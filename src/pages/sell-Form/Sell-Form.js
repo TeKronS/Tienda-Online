@@ -295,7 +295,6 @@ export const SellForm = ({ user }) => {
           <StateComponent stateChanged={stateChanged} />
 
           <ImageComponent
-            key={2}
             setImageState={setImageState}
             setImageUrl={setImageUrl}
             isEnableButtonNext={isEnableButtonNext}
