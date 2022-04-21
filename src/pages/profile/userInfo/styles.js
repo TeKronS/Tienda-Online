@@ -25,13 +25,6 @@ export const Ficha = styled.section`
   }
 `;
 
-export const ImageContainer = styled.div`
-  display: flex;
-  width: 200px;
-  height: 200px;
-  justify-self: center;
-`;
-
 export const DataContainer = styled.div`
   font-size: 1.5em;
   display: grid;

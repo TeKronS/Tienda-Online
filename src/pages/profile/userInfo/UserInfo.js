@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { EditInputs } from "./InputsEdit";
 import {
   Ficha,
-  ImageContainer,
   DataContainer,
   DataDiv,
   DataSpan,
@@ -13,9 +12,19 @@ import {
   updateData,
   updateHiddeData,
 } from "./../../../firebase/fire-data-base";
+import { updatePhoto } from "./../../../firebase/firebase-config";
+import { ProfileImage } from "./imageSection/ProfileImage";
 
 export const UserInfo = ({ user, hiddeData }) => {
   const [ifEdit, setifEdit] = useState(false);
+
+  const [image, setImage] = useState({
+    campo: user.data.photoURL,
+    loading: false,
+    new: false,
+  });
+
+  const [imgLoading, setLoading] = useState(false);
 
   const [usuario, setUsuario] = useState({
     campo: user.data.userName,
@@ -66,6 +75,7 @@ export const UserInfo = ({ user, hiddeData }) => {
   const newData = {
     userName: usuario.campo,
     city: ciudad.campo,
+    photoURL: image.campo,
   };
 
   const newHiddeData = {
@@ -76,6 +86,8 @@ export const UserInfo = ({ user, hiddeData }) => {
   const valido = [usuario.valido, ciudad.valido, telefono.valido];
 
   async function save() {
+    if (!image.loading && image.new) updatePhoto(image.campo);
+
     if (valido.indexOf("false") < 0) {
       await updateData({
         name: "Usuarios",
@@ -85,13 +97,12 @@ export const UserInfo = ({ user, hiddeData }) => {
         return;
       });
 
-      await updateHiddeData({ uid: user.data.uid, data: newHiddeData })
-        .then(() => {
+      await updateHiddeData({ uid: user.data.uid, data: newHiddeData }).then(
+        () => {
           hiddeData.setHiddeData({ ...hiddeData.hiddeData, ...newHiddeData });
-        })
-        .catch(() => {
-          user.setState({ ...user.data, ...newData });
-        });
+        }
+      );
+
       user.setState({ ...user.data, ...newData });
 
       setifEdit(false);
@@ -101,9 +112,7 @@ export const UserInfo = ({ user, hiddeData }) => {
   return (
     <>
       <Ficha className={"animation"}>
-        <ImageContainer>
-          <img src={user.data.photoURL} height={200} alt={"UerPhoto"} />
-        </ImageContainer>
+        <ProfileImage ifEdit={ifEdit} data={{ image, setImage, setLoading }} />
         <DataContainer>
           <DataSpan>
             <DivText>

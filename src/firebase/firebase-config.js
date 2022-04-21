@@ -40,7 +40,7 @@ function mapUserFromFirebaseAuth(user) {
   return usuario;
 }
 //-----Iniciar Session----------------------
-export function signInWithEmailAndPasswords(email, password) {
+export async function signInWithEmailAndPasswords(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
     .then((res) => {
       const usuario = mapUserFromFirebaseAuth(res);
@@ -64,7 +64,7 @@ export function signOuts() {
 }
 //-----Registro----------------------
 
-export function RegisterWithEmailAndPass(email, pass, userData) {
+export async function RegisterWithEmailAndPass(email, pass, userData) {
   return createUserWithEmailAndPassword(auth, email, pass)
     .then((res) => {
       return addData(userData, res.user.uid);
@@ -72,12 +72,11 @@ export function RegisterWithEmailAndPass(email, pass, userData) {
     .catch(error);
 }
 
-function addData(userData, uid) {
-  const auth = getAuth();
+async function addData(userData, uid) {
   return updateProfile(auth.currentUser, {
     displayName: userData.name,
     photoURL:
-      "https://static.vecteezy.com/system/resources/thumbnails/000/550/980/small/user_icon_001.jpg",
+      "https://firebasestorage.googleapis.com/v0/b/sesion-tienda-online.appspot.com/o/profile%2Fuser_icon_001.jpg?alt=media&token=0da13457-55b0-40f0-97ad-4385880e97d2",
   })
     .then(() => {
       return setDataUser(userData, uid);
@@ -85,6 +84,10 @@ function addData(userData, uid) {
     .catch(error);
 }
 //------------
+
+export async function updatePhoto(url) {
+  return updateProfile(auth.currentUser, { photoURL: url });
+}
 
 function error(error) {
   var errorCode = error.code;
