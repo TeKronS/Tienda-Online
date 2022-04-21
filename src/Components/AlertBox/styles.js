@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const color = {
-  color1: "rgba(31,118,83,0.98)",
-  color2: "#da2f5f",
-  color3: "rgba(31,118,83,0.98)",
-  gris: "#da2f5f",
-};
-
 export const Body = styled.section`
   position: fixed;
   top: 0;
