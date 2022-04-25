@@ -9,7 +9,7 @@ import {
   updateDoc,
   arrayUnion,
   deleteDoc,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 //-------------------------------------
 
 export async function findDataUser(user, signOuts) {

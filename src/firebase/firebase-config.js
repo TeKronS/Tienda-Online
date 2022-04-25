@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
 import { setDataUser, findDataUser } from "./fire-data-base";
 import { getStorage } from "firebase/storage";
 //-------------------------------------
