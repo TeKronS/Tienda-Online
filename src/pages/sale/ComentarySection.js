@@ -6,9 +6,11 @@ import {
   setComentarys,
 } from "./../../firebase/firebase-comentarys";
 import { Timestamp } from "firebase/firestore";
+import { useHistory } from "react-router-dom";
 
 export const ComentarySection = ({ docId, docUid, user }) => {
   const [comentarys, setComentarysData] = useState(null);
+  let history = useHistory();
 
   useEffect(() => {
     let mount = true;
@@ -25,21 +27,25 @@ export const ComentarySection = ({ docId, docUid, user }) => {
   }, []);
 
   async function setComentary(text) {
-    const date = new Date();
-    const time = date.getTime();
+    if (user) {
+      const date = new Date();
+      const time = date.getTime();
 
-    let comentario = {};
+      let comentario = {};
 
-    comentario[time] = {
-      name: user.userName,
-      uid: user.uid,
-      comentario: text,
-      fecha: Timestamp.fromDate(date),
-    };
+      comentario[time] = {
+        name: user.userName,
+        uid: user.uid,
+        comentario: text,
+        fecha: Timestamp.fromDate(date),
+      };
 
-    const condition = comentarys ? true : false;
+      const condition = comentarys ? true : false;
 
-    setComentarys(docId, comentario, condition);
+      setComentarys(docId, comentario, condition);
+    } else {
+      history.push("/Login");
+    }
   }
 
   function sendResponse(comentaryId, text) {
