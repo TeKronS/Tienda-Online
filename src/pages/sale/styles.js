@@ -106,14 +106,8 @@ export const DescriptionDocBody = styled.section`
   }
 `;
 
-export const ComentryBox = styled.section`
+export const ComentaryContainer = styled.section`
   grid-column-start: 1;
   grid-column-end: -1;
   font-size: 1.1em;
-
-  div {
-    padding: 10px;
-    text-align: left;
-    margin: 10px;
-  }
 `;

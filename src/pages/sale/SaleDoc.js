@@ -7,12 +7,11 @@ import {
   DocImgContainer,
   DataDocBody,
   DescriptionDocBody,
-  ComentryBox,
-  Price
+  Price,
 } from "./styles";
 import { DataSeller } from "./data-seller/DataSeller";
 import { SlideShow } from "./../../Components/Slider/Slideshow";
-
+import { ComentarySection } from "./ComentarySection";
 //----------------------------------------
 export const SaleDoc = ({ user }) => {
   const [doc, setDoc] = useState(null);
@@ -64,19 +63,16 @@ export const SaleDoc = ({ user }) => {
       <DescriptionDocBody className={"box"}>
         <h3>Descripción</h3>
         <p className={"box"}>
-          {description.map((value) => {
+          {description.map((value, key) => {
             if (value === "\n") {
-              return <br />;
+              return <br key={key} />;
             } else {
               return value;
             }
           })}
         </p>
       </DescriptionDocBody>
-      <ComentryBox className={"box"}>
-        <h3>Comentarios</h3>
-        <div className={"box"}></div>
-      </ComentryBox>
+      <ComentarySection docId={docId} docUid={doc.uid} user={user} />
     </SaleDocBody>
   );
 };
