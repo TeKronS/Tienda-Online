@@ -29,7 +29,17 @@ export const SaleDoc = ({ user }) => {
   const description = doc ? doc.description.match(/([^\r\n]+|\n|\r\n)/g) : 0;
 
   return !doc ? (
-    <h2>nada</h2>
+    <SaleDocBody>
+      <Title className={"box"}></Title>
+      <DataSeller />
+      <DocImgContainer className={"box"}></DocImgContainer>
+      <DataDocBody className={"box"} />
+      <DescriptionDocBody className={"box"}>
+        <h3>Descripción</h3>
+        <p className={"box"}></p>
+      </DescriptionDocBody>
+      <ComentarySection />
+    </SaleDocBody>
   ) : (
     <SaleDocBody>
       <Title className={"box"}>
