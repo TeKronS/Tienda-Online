@@ -105,7 +105,9 @@ export const ButtonRight = styled.button`
   right: 5px;
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
   margin-bottom: 10px !important;
   text-decoration: underline green;
+  font-size: 3em !important;
+  text-align: center;
 `;

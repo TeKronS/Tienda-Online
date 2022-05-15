@@ -34,9 +34,11 @@ export const DataSellerBody = styled.section`
     padding: 10px;
     div {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 32px 32px 32px;
+      grid-template-columns: 2fr 3fr;
+      grid-template-rows: 32px 32px;
       margin: auto;
+      gap: 0 5px;
+      white-space: nowrap;
     }
   }
   @media screen and (max-width: 400px) {
