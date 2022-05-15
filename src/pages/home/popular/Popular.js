@@ -15,6 +15,7 @@ export const PopularSection = () => {
   const point = useRef(0);
 
   useEffect(() => {
+    let mount = true;
     //-------AÑADIENDO EVENTO RESIZE------------
     function resize() {
       const windowWidth = window.innerWidth;
@@ -30,10 +31,13 @@ export const PopularSection = () => {
 
     window.addEventListener("resize", resize);
     //--OBTENIENDO POPULARES--------
-    populares().then(setPopular);
+    populares().then((response) => {
+      if (mount) setPopular(response);
+    });
 
     //---LIMPIAR EVENTOS----
     return () => {
+      mount = false;
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -72,8 +76,8 @@ export const PopularSection = () => {
         >{`<`}</ButtonLeft>
         <CardContainer ref={refCardContainer}>
           {popular ? (
-            popular.map((data) => {
-              return <PopularCard key={data.id} data={data} />;
+            popular.map((doc) => {
+              return <PopularCard key={doc.id} data={doc} />;
             })
           ) : (
             <>
