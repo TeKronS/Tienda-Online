@@ -1,4 +1,6 @@
-import { BodyInfoBanner, Title, Info } from "./styles";
+import { BodyInfoBanner, Title, Info, LinkImg, Text, Name } from "./styles";
+import iconFB from "./../../../img/fb_icon_325x325.png";
+import IconGit from "./../../../img/Github.png";
 
 export const BannerInfo = () => {
   return (
@@ -6,34 +8,46 @@ export const BannerInfo = () => {
       <Title>Proyecto Tenda Online</Title>
       <Info>
         <span className="label">Hecho por:</span>
-        <span className="content"> Simon Enrique Ramirez Ferrer</span>
+        <Name> Simon Enrique Ramirez Ferrer</Name>
       </Info>
       <Info>
         <span className="label">GitHub: </span>
-        <span className="content">
-          <a href="https://github.com/TeKronS/" target={"blank"}>
-            https://github.com/TeKronS/
-          </a>
-        </span>
+        <div className="content">
+          <Text>Codigo del Proyecto</Text>
+          <LinkImg
+            className="git"
+            href="https://github.com/TeKronS/"
+            target={"blank"}
+          >
+            <img height={55} alt="" src={IconGit} />
+          </LinkImg>
+        </div>
       </Info>
       <Info>
         <span className="label">Facebook: </span>
-        <span className="content">
-          <a
+        <div className="content">
+          <Text> Encuentrame en Facebook</Text>
+          <LinkImg
+            className="facebook"
             href="https://www.facebook.com/simonenrique.ramirezferrer"
             target={"blank"}
           >
-            https://www.facebook.com/simonenrique.ramirezferrer
-          </a>
-        </span>
+            <img height={55} alt="" src={iconFB} />
+          </LinkImg>
+        </div>
       </Info>
       <Info>
         <span className="label">GitHub: </span>
-        <span className="content">
-          <a href="https://github.com/TeKronS/" target={"blank"}>
-            https://github.com/TeKronS/
-          </a>
-        </span>
+        <div className="content">
+          <Text>Codigo del Proyecto</Text>
+          <LinkImg
+            className="git"
+            href="https://github.com/TeKronS/"
+            target={"blank"}
+          >
+            <img height={55} alt="" src={IconGit} />
+          </LinkImg>
+        </div>
       </Info>
     </BodyInfoBanner>
   );
