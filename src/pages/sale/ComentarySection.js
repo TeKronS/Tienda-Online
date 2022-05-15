@@ -19,12 +19,12 @@ export const ComentarySection = ({ docId, docUid, user }) => {
       if (mount) setComentarysData(data);
     }
 
-    getComentarys(docId, setState);
+    if (docId) getComentarys(docId, setState);
 
     return () => {
       mount = false;
     };
-  }, []);
+  }, [docId]);
 
   async function setComentary(text) {
     if (user) {
@@ -55,7 +55,8 @@ export const ComentarySection = ({ docId, docUid, user }) => {
   }
 
   function canComment() {
-    return docUid !== user.uid;
+    if (user) return docUid !== user.uid;
+    else return true;
   }
 
   return (
