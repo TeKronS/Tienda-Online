@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
 import { DataSellerBody } from "./styles";
-import {
-  findDataUser,
-  findHiddenUserData,
-} from "./../../../firebase/fire-data-base";
-import { Link } from "react-router-dom";
+import { findDataUserSale } from "./../../../firebase/fire-data-base";
 
 export const DataSeller = ({ userId }) => {
-  const [dataSeller, setDataSeller] = useState(null);
-
+  const [dataSeller, setDataSeller] = useState(false);
   useEffect(() => {
-    findDataUser({ uid: userId }, setDataSeller);
-    findHiddenUserData({ uid: userId });
-  }, []);
+    if (userId) {
+      findDataUserSale(userId).then((response) => {
+        if (response) setDataSeller(response);
+      });
+    }
+  }, [userId]);
 
   return dataSeller ? (
     <DataSellerBody className={"box"}>
@@ -20,7 +18,7 @@ export const DataSeller = ({ userId }) => {
       <div>
         <span>{dataSeller.userName}</span>
         <span>
-          Ubicación: <span>{dataSeller.city}</span>
+          Ubicación:<span> {dataSeller.city}</span>
         </span>
         <span>
           Reputacion:
@@ -29,19 +27,13 @@ export const DataSeller = ({ userId }) => {
         <span>
           Ventas Concretadas: <span>{dataSeller.itemsSold}</span>
         </span>
-        <Link to="/">
-          <span>Otras Ventas</span>
-        </Link>
       </div>
     </DataSellerBody>
-  ) : (
+  ) : dataSeller === null ? (
     <DataSellerBody className={"box"}>
-      <span>Datos Vendedor</span>
-      <span>Nombre</span>
-      <span>Ciudad</span>
-      <span>Reputacion</span>
-      <span>Ventas Concretadas</span>
-      <span>Otras Ventas</span>
+      <span>Error al Buscar los Datos</span>
     </DataSellerBody>
+  ) : (
+    <DataSellerBody className={"box"} />
   );
 };
