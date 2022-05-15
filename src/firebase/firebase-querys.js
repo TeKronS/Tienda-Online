@@ -36,3 +36,26 @@ export const populares = async () => {
 
   return docList;
 };
+
+export const recientViewCategory = async (category) => {
+  const ventaRef = collection(db, "Ventas");
+  const querySnapshot = query(
+    ventaRef,
+    where("category", "==", category),
+    orderBy("visits", "desc"),
+    limit(6)
+  );
+
+  const listDoc = await getDocs(querySnapshot);
+  let docList = [];
+  let i = 0;
+  while (listDoc.docs.length > i) {
+    const id = listDoc.docs[i].id;
+    const data = listDoc.docs[i].data();
+    docList.push({ id, ...data });
+
+    i++;
+  }
+
+  return docList;
+};
