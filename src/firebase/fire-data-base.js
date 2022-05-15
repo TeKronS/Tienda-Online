@@ -52,6 +52,26 @@ export async function findHiddenUserData(user) {
   }
 }
 
+//-------
+export async function findDataUserSale(uid) {
+  if (!uid) {
+    return null;
+  }
+  const docRef = doc(db, "Usuarios", uid);
+  const docSnap = await getDoc(docRef);
+  try {
+    if (docSnap.exists()) {
+      const dataUser = { ...docSnap.data() };
+      return dataUser;
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return null;
+  }
+}
 //-----------------------------------------
 export async function setSales(data) {
   const ventaRef = collection(db, "Ventas");
@@ -86,13 +106,7 @@ export async function setDataUser(userData, uid) {
     goodNote: 0,
     badNote: 0,
     itemsForSale: [],
-    recientViews: {
-      0: ["pc", "laptop"],
-      1: ["pc", "laptop"],
-      2: ["pc", "laptop"],
-      3: ["pc", "laptop"],
-      4: ["pc", "laptop"],
-    },
+    recientViews: "computacion",
   };
 
   const hiddenData = { phone: userData.phone };
@@ -133,9 +147,9 @@ export async function findDataSales(saleDoc, setState, user) {
   const docSnap = await getDoc(docRef);
   try {
     if (docSnap.exists()) {
-      const dataUser = { ...docSnap.data() };
-      if (user) addVisits(saleDoc, user);
-      setState(dataUser);
+      const dataDoc = { ...docSnap.data() };
+      if (user) addVisits(saleDoc, user, dataDoc.category);
+      setState(dataDoc);
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -144,32 +158,14 @@ export async function findDataSales(saleDoc, setState, user) {
     console.error("Error adding document: ", e);
   }
 }
-function addVisits(document, user) {
+
+function addVisits(document, user, category) {
   const saleRef = doc(db, "Ventas", document);
   const userRef = doc(db, "Usuarios", user);
   updateDoc(saleRef, {
     visits: arrayUnion(user),
   });
-  updateDoc(userRef, { "recientViews.0": ["categoria", "sub"] });
-}
-
-export async function findDataSale(saleDoc) {
-  if (!saleDoc) {
-    return;
-  }
-  const docRef = doc(db, "Ventas", saleDoc);
-  const docSnap = await getDoc(docRef);
-  try {
-    if (docSnap.exists()) {
-      const dataSale = { ...docSnap.data() };
-      return dataSale;
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+  updateDoc(userRef, { recientViews: category });
 }
 
 export const updateData = ({ name, uid, data }) => {
