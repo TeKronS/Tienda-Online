@@ -30,10 +30,11 @@ export const SerchSales = ({ titles }) => {
         const results = await Promise.all(promises);
         createListItem(results).then((response) => {
           if (response.length) setVentas(response);
-          else setVentas(false);
+          else {
+            setVentas(false);
+          }
         });
       }
-
       if (docList) {
         getQuery();
         setVentas(null);
@@ -41,14 +42,38 @@ export const SerchSales = ({ titles }) => {
         setVentas(false);
       }
     }
-    serch();
+    if (titles) serch();
+    setNameOrden(null);
+    setPriceOrden(null);
   }, [docId, titles]);
 
   //------------
   function showFilter() {
     refSerchSection.current.classList.toggle("desplegeFilter");
   }
-
+  const articles =
+    ventas &&
+    ventas
+      .sort(function (a, b) {
+        let x = a.title.toLowerCase();
+        let y = b.title.toLowerCase();
+        if (nameOrder) {
+          return x < y ? -1 : x > y ? 1 : 0;
+        } else if (nameOrder === false) {
+          return x > y ? -1 : x < y ? 1 : 0;
+        } else {
+          return 0;
+        }
+      })
+      .sort(function (a, b) {
+        if (priceOrder) {
+          return a.price - b.price;
+        } else if (priceOrder === false) {
+          return b.price - a.price;
+        } else {
+          return 0;
+        }
+      });
   //---------------
   return (
     <section ref={refSerchSection} className="desplegeFilter">
@@ -60,8 +85,8 @@ export const SerchSales = ({ titles }) => {
         setPriceOrden={setPriceOrden}
       />
       <SalesBody ref={refSerchBody}>
-        {ventas ? (
-          ventas.map((data) => {
+        {articles ? (
+          articles.map((data) => {
             return (
               <ItemSerch key={data.id} className={"box"}>
                 <ItemSerchImgContainer>

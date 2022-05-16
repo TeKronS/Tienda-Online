@@ -11,10 +11,8 @@ export const OrderBar = ({
   function changedNameOrder(e) {
     if (e.target.children[0]) {
       if (nameOrder) {
-        e.target.children[0].innerHTML = "▲";
         setNameOrden(false);
       } else {
-        e.target.children[0].innerHTML = "▼";
         setNameOrden(true);
       }
     }
@@ -24,10 +22,8 @@ export const OrderBar = ({
   function changedPriceOrder(e) {
     if (e.target.children[0]) {
       if (priceOrder) {
-        e.target.children[0].innerHTML = "▲";
         setPriceOrden(false);
       } else {
-        e.target.children[0].innerHTML = "▼";
         setPriceOrden(true);
       }
     }
@@ -39,11 +35,23 @@ export const OrderBar = ({
       <span>Ordenar por:</span>
       <button onClick={changedNameOrder}>
         Nombre
-        <div>◯</div>
+        {nameOrder ? (
+          <div>▼</div>
+        ) : nameOrder === null ? (
+          <div>◯</div>
+        ) : (
+          <div>▲</div>
+        )}
       </button>
       <button onClick={changedPriceOrder}>
         Precio
-        <div>◯</div>
+        {priceOrder ? (
+          <div>▼</div>
+        ) : priceOrder === null ? (
+          <div>◯</div>
+        ) : (
+          <div>▲</div>
+        )}
       </button>
     </OrderBox>
   );
