@@ -16,6 +16,21 @@ export const BodyShop = styled.main`
   top: 130px;
   min-height: calc(100vh - 130px);
   font-size: 10px;
+  .desplegeFilter {
+    .desplege svg {
+      transform: rotateY(0deg) !important;
+    }
+    @media screen and (max-width: 600px) {
+      .desplege {
+        height: 32px !important;
+        width: 32px !important;
+      }
+      .desplege .relleno {
+        height: 0 !important;
+        width: 0 !important;
+      }
+    }
+  }
 `;
 
 export const FooterShop = styled.footer`

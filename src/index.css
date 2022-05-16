@@ -1,17 +1,17 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-    /* height: 100%; */
-    overflow-y: scroll;
-    font-family: system-ui;
+  /* height: 100%; */
+  overflow-y: scroll;
+  font-family: system-ui;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -24,23 +24,6 @@ code {
 .visible {
   display: block !important;
 }
-
-.desplegeFilter svg {
-  transform: rotateY(0deg) !important;
-}
-
-@media screen and (max-width: 600px) {
-  .desplegeFilter {
-    height: 32px !important;
-    width: 32px !important;
-  }
-  .desplegeFilter .relleno {
-    height: 0 !important;
-    width: 0 !important;
-  }
-}
-
-
 
 .disable {
   opacity: 0.5;

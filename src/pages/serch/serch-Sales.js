@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { querySales } from "./../../firebase/firebase-querys";
 import { FilterSection } from "./filter/FilterSection";
 import { Link, useParams } from "react-router-dom";
+import { OrderBar } from "./../../Components/OrderBar/OrderBar";
 import {
   ItemSerch,
   SalesBody,
@@ -11,10 +12,12 @@ import {
 } from "./styles";
 //------------------------
 export const SerchSales = ({ titles }) => {
-  const refFilter = useRef(null);
-  const [ventas, setVentas] = useState(null);
-  const refSerchBody = useRef(null);
   const { docId } = useParams();
+  const refSerchSection = useRef(null);
+  const refSerchBody = useRef(null);
+  const [ventas, setVentas] = useState(null);
+  const [nameOrder, setNameOrden] = useState(null);
+  const [priceOrder, setPriceOrden] = useState(null);
 
   useEffect(() => {
     async function serch() {
@@ -43,14 +46,19 @@ export const SerchSales = ({ titles }) => {
 
   //------------
   function showFilter() {
-    refFilter.current.classList.toggle("desplegeFilter");
+    refSerchSection.current.classList.toggle("desplegeFilter");
   }
 
   //---------------
   return (
-    <>
-      <FilterSection showFilter={showFilter} innerRef={refFilter} />
-
+    <section ref={refSerchSection} className="desplegeFilter">
+      <FilterSection showFilter={showFilter} />
+      <OrderBar
+        nameOrder={nameOrder}
+        setNameOrden={setNameOrden}
+        priceOrder={priceOrder}
+        setPriceOrden={setPriceOrden}
+      />
       <SalesBody ref={refSerchBody}>
         {ventas ? (
           ventas.map((data) => {
@@ -99,7 +107,7 @@ export const SerchSales = ({ titles }) => {
           <NoResult>"No se encontraron resultados"</NoResult>
         )}
       </SalesBody>
-    </>
+    </section>
   );
 };
 

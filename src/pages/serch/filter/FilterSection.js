@@ -7,7 +7,7 @@ import {
   FilterType,
   PriceSection,
   FilterBarBoxPosition,
-  Relleno
+  Relleno,
 } from "./styles";
 import { Footer } from "./../../../footer/footer";
 import { Location } from "./location";
@@ -69,7 +69,7 @@ export const FilterSection = ({ innerRef, showFilter }) => {
   }, []);
   return (
     <FilterBarBoxPosition ref={refFilterPosition}>
-      <FilterBar className={"desplegeFilter"} ref={innerRef}>
+      <FilterBar className={"desplege"}>
         <FilterHeader onClick={showFilter}>
           <FontAwesomeIcon icon={faCaretLeft} size="2x" />
         </FilterHeader>
