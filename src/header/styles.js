@@ -80,6 +80,8 @@ export const UserSection = styled.section`
   grid-template-rows: 60px 30px;
   position: relative;
   margin: 2px 10px 5px;
+  z-index: 10;
+
   a {
     font-size: 14px;
     margin-top: auto;
@@ -97,7 +99,6 @@ export const BoxUser = styled.div`
   line-height: 27px;
   top: 13px;
   right: 14px;
-
   @media screen and (max-width: 600px) {
     display: grid;
     position: absolute;

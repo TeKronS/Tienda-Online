@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FilterBarBoxPosition = styled.section`
   position: fixed;
   overflow: visible;
-  z-index: 5;
+  z-index: 2;
   bottom: 0;
   top: 140px;
 `;
