@@ -5,7 +5,7 @@ import IconGit from "./../../../img/Github.png";
 export const BannerInfo = () => {
   return (
     <BodyInfoBanner>
-      <Title>Proyecto Tenda Online</Title>
+      <Title>Proyecto Tienda Online</Title>
       <Info>
         <span className="label">Hecho por:</span>
         <Name> Simon Enrique Ramirez Ferrer</Name>
