@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const OrderBox = styled.section`
   border: 1px solid #021323;
-  /* background: rgba(155, 155, 155, 0.5); */
   background: #207150;
-
   display: flex;
   justify-content: flex-end;
   font-size: 16px;
@@ -12,12 +10,14 @@ export const OrderBox = styled.section`
   position: fixed;
   overflow: hidden;
   top: 140px;
-  right: 0;
+  right: 2px;
   left: 210px;
-  z-index: 5;
+  z-index: 2;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   color: white;
+  transition: 350ms ease-in-out 0s;
+
   button {
     margin-right: 1px;
     background: #d1e1da;

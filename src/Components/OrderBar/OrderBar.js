@@ -31,7 +31,7 @@ export const OrderBar = ({
   //------------------------------------
 
   return (
-    <OrderBox className={"box"}>
+    <OrderBox className={"box order"}>
       <span>Ordenar por:</span>
       <button onClick={changedNameOrder}>
         Nombre

@@ -21,6 +21,9 @@ export const BodyShop = styled.main`
       transform: rotateY(0deg) !important;
     }
     @media screen and (max-width: 600px) {
+      .order {
+        left: 40px;
+      }
       .desplege {
         height: 32px !important;
         width: 32px !important;
