@@ -71,6 +71,7 @@ export const SearchBarrSection = styled.section`
   button {
     margin: 0;
     height: 38px;
+    cursor: pointer;
   }
 `;
 
