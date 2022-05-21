@@ -1,4 +1,4 @@
-import { stateOfVenezuela } from "./../../../../stateOfVenezuela";
+import { cityOfVenezuela } from "./../../../../cityOfVenezuela";
 
 export const Location = ({ filterResult }) => {
   function handleClick(e) {
@@ -21,7 +21,7 @@ export const Location = ({ filterResult }) => {
         Ubicación
       </h3>
       <div style={{ display: "none" }}>
-        {stateOfVenezuela.map((location, key) => {
+        {cityOfVenezuela.map((location, key) => {
           return (
             <label key={key} htmlFor={location}>
               {location}

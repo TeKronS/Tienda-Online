@@ -186,3 +186,10 @@ export {
   MensajeExito,
   MensajeError,
 };
+
+export const BoXSelect = styled.div`
+  select {
+    width: 100%;
+    height: 44px;
+  }
+`;

@@ -9,7 +9,7 @@ export const Login = ({ logIn, userLogin }) => {
   let history = useHistory();
   const RefButton = useRef(null);
   useEffect(() => {
-    if (userLogin) history.push("/Sales");
+    if (userLogin) history.push("/");
   }, [userLogin]);
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");

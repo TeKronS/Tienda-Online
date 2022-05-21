@@ -1,10 +1,11 @@
 import { RegistrationForm } from "./ComponetFormRegistro/ComponetFormularioRegistro";
 import { Title, BodySection } from "./styles";
-export const Registration = ({ setState, user }) => {
+
+export const Registration = ({ user }) => {
   return (
     <BodySection>
       <Title>REGISTRATE</Title>
-      <RegistrationForm setState={setState} user={user} />
+      <RegistrationForm user={user} />
     </BodySection>
   );
 };

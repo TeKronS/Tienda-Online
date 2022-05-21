@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   BodyInputRegistro,
   Formulario,
@@ -8,7 +8,9 @@ import {
   Boton,
   MensajeExito,
   MensajeError,
+  BoXSelect,
 } from "./StylesElementRegistro.js";
+import { CitysSelect } from "../../../Components/StatesSelect/CitysSelect";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ComponenteInput } from "./InputRegistro";
@@ -26,9 +28,13 @@ const expresiones = {
 export const RegistrationForm = ({ user }) => {
   //---
   let history = useHistory();
-  if (user) {
-    history.push("/");
-  }
+
+  useEffect(() => {
+    if (user) {
+      history.push("/");
+    }
+  });
+
   //---
   function redirect() {
     history.push("/Login");
@@ -192,7 +198,7 @@ export const RegistrationForm = ({ user }) => {
           estado={telefono}
           cambiarEstado={setTelefono}
         />
-        <ComponenteInput
+        {/* <ComponenteInput
           type="text"
           label="Ciudad"
           placeholder="Ciudad"
@@ -201,8 +207,13 @@ export const RegistrationForm = ({ user }) => {
           expresionRegular={expresiones.nombre}
           estado={ciudad}
           cambiarEstado={setCiudad}
-        />
-
+        /> */}
+        <BoXSelect>
+          <Label valido={ciudad.valido} htmlFor={"Ciudad"}>
+            Ciudad
+          </Label>
+          <CitysSelect estado={ciudad} cambiarEstado={setCiudad} />
+        </BoXSelect>
         <ContenedorTerminos>
           <Label>
             <input
