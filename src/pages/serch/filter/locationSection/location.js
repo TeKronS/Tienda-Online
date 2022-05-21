@@ -1,3 +1,5 @@
+import { stateOfVenezuela } from "./../../../../stateOfVenezuela";
+
 export const Location = ({ filterResult }) => {
   function handleClick(e) {
     const child = e.target.nextSibling;
@@ -10,15 +12,7 @@ export const Location = ({ filterResult }) => {
 
   function changeLocation(e) {
     const city = e.target.value;
-
     filterResult({ city: city });
-
-    // if (e.target.checked) {
-    //   const city = e.target.value;
-    //   filterResult({ city: city });
-    // } else {
-    //   filterResult({ city: false });
-    // }
   }
 
   return (
@@ -27,7 +21,7 @@ export const Location = ({ filterResult }) => {
         Ubicación
       </h3>
       <div style={{ display: "none" }}>
-        {state.map((location, key) => {
+        {stateOfVenezuela.map((location, key) => {
           return (
             <label key={key} htmlFor={location}>
               {location}
@@ -44,30 +38,3 @@ export const Location = ({ filterResult }) => {
     </section>
   );
 };
-
-const state = [
-  "Amazonas",
-  "Anzoategui",
-  "Apure",
-  "Aragua",
-  "Barinas",
-  "Bolívar",
-  "Carabobo",
-  "Cojedes",
-  "Delta Amacuro",
-  "Distrito Capital",
-  "Falcón",
-  "Guárico",
-  "Lara",
-  "Mérida",
-  "Miranda",
-  "Monagas",
-  "Nueva Esparta",
-  "Portuguesa",
-  "Sucre",
-  "Táchira",
-  "Trujillo",
-  "La Guaira",
-  "Yaracuy",
-  "Zulia",
-];
