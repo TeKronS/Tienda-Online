@@ -1,25 +1,26 @@
 import { useEffect, useRef } from "react";
-
-import { Categorys } from "./categorys";
+import { Categorys } from "./categorySection/categorys";
 import {
   FilterHeader,
   FilterBar,
   FilterType,
-  PriceSection,
   FilterBarBoxPosition,
   Relleno,
 } from "./styles";
 import { Footer } from "./../../../footer/footer";
-import { Location } from "./location";
+import { Location } from "./locationSection/location";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { StateSection } from "./stateSection/stateSection";
+import { PriceSection } from "./priceSection/priceSection";
 
-export const FilterSection = ({ innerRef, showFilter }) => {
+export const FilterSection = ({ filter, showFilter, filterResult }) => {
   const refFilterPosition = useRef(null);
 
   useEffect(() => {
     refFilterPosition.current.style.top = `140px`;
     let prevScrollpos = window.pageYOffset;
+
     function scrolin() {
       if (refFilterPosition.current) {
         const windowHeight = window.innerHeight;
@@ -27,6 +28,7 @@ export const FilterSection = ({ innerRef, showFilter }) => {
         const filterTop = parseInt(refFilterPosition.current.style.top, 10);
         const scroll = prevScrollpos - currentScrollPos;
         const newTop = filterTop + scroll;
+
         if (windowHeight <= 600 && windowHeight > 400) {
           if (prevScrollpos < currentScrollPos) {
             if (newTop <= 10) {
@@ -67,6 +69,7 @@ export const FilterSection = ({ innerRef, showFilter }) => {
       window.removeEventListener("scroll", scrolin);
     };
   }, []);
+
   return (
     <FilterBarBoxPosition ref={refFilterPosition}>
       <FilterBar className={"desplege"}>
@@ -81,42 +84,13 @@ export const FilterSection = ({ innerRef, showFilter }) => {
               <input id={"free"} type={"checkbox"} />
             </label>
           </section>
-          <section>
-            <h3>Estado del Articulo</h3>
-            <label htmlFor={"nuevo"}>
-              Nuevo
-              <input
-                id={"nuevo"}
-                value={"Nuevo"}
-                type={"radio"}
-                name={"state"}
-              />
-            </label>
-            <label htmlFor={"usado"}>
-              Usado
-              <input
-                id={"usado"}
-                value={"Usado"}
-                type={"radio"}
-                name={"state"}
-              />
-            </label>
-          </section>
-          <PriceSection>
-            <h3>Rango de Precio</h3>
-            <label htmlFor={"min"}>Precio minimo</label>
-            <input id={"min"} type={"number"} placeholder={"20"} />
-            <label htmlFor={"max"}>Precio maximo</label>
-            <input id={"max"} type={"number"} placeholder={"60"} />
-            el precio sera
-          </PriceSection>
-          <Categorys />
-          <Location />
+          <StateSection filterResult={filterResult} />
+          <PriceSection filter={filter} filterResult={filterResult} />
+          <Categorys filterResult={filterResult} />
+          <Location filterResult={filterResult} />
         </FilterType>
         <Footer />
-        <Relleno className={"relleno"}>
-          Ola que hace <b>._.</b>
-        </Relleno>
+        <Relleno className={"relleno"} />
       </FilterBar>
     </FilterBarBoxPosition>
   );

@@ -1,13 +1,26 @@
-export const Location = () => {
+export const Location = ({ filterResult }) => {
   function handleClick(e) {
     const child = e.target.nextSibling;
-    console.log(child.style);
     if (child.style.display === "" || child.style.display === "none") {
       child.style.display = "block";
     } else {
       child.style.display = "none";
     }
   }
+
+  function changeLocation(e) {
+    const city = e.target.value;
+
+    filterResult({ city: city });
+
+    // if (e.target.checked) {
+    //   const city = e.target.value;
+    //   filterResult({ city: city });
+    // } else {
+    //   filterResult({ city: false });
+    // }
+  }
+
   return (
     <section>
       <h3 style={{ cursor: "pointer" }} onClick={handleClick}>
@@ -18,7 +31,12 @@ export const Location = () => {
           return (
             <label key={key} htmlFor={location}>
               {location}
-              <input id={location} value={location} type={"checkbox"} />
+              <input
+                onChange={changeLocation}
+                id={location}
+                value={location}
+                type={"checkbox"}
+              />
             </label>
           );
         })}
@@ -51,5 +69,5 @@ const state = [
   "Trujillo",
   "La Guaira",
   "Yaracuy",
-  "Zulia"
+  "Zulia",
 ];

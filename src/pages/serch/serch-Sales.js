@@ -15,9 +15,18 @@ export const SerchSales = ({ titles }) => {
   const { docId } = useParams();
   const refSerchSection = useRef(null);
   const refSerchBody = useRef(null);
+  const query = useRef(null);
   const [ventas, setVentas] = useState(null);
   const [nameOrder, setNameOrden] = useState(null);
   const [priceOrder, setPriceOrden] = useState(null);
+  const [filter, setFilter] = useState({
+    state: null,
+    minPrice: null,
+    maxPrice: null,
+    category: null,
+    subCategory: null,
+    city: [],
+  });
 
   useEffect(() => {
     async function serch() {
@@ -29,15 +38,16 @@ export const SerchSales = ({ titles }) => {
         const promises = docList.map(querySales);
         const results = await Promise.all(promises);
         createListItem(results).then((response) => {
-          if (response.length) setVentas(response);
-          else {
+          if (response.length) {
+            query.current = response;
+            setVentas(response);
+          } else {
             setVentas(false);
           }
         });
       }
       if (docList) {
         getQuery();
-        setVentas(null);
       } else {
         setVentas(false);
       }
@@ -75,9 +85,115 @@ export const SerchSales = ({ titles }) => {
         }
       });
   //---------------
+  function filterResult({
+    state,
+    minPrice,
+    maxPrice,
+    category,
+    subCategory,
+    city,
+  }) {
+    let newVentas = query.current.slice();
+    let newFilter = {};
+
+    if (state) {
+      newVentas = newVentas.filter((doc) => doc.state === state);
+      newFilter = { ...filter, state: state };
+    } else if (state === false) {
+      newFilter = { ...filter, state: null };
+    } else {
+      if (filter.state) {
+        newVentas = newVentas.filter((doc) => doc.state === filter.state);
+      }
+    }
+
+    if (filter.minPrice > 0 || minPrice > 0) {
+      if (minPrice > 0) {
+        newVentas = newVentas.filter((doc) => doc.price >= minPrice);
+        newFilter = { ...filter, minPrice: minPrice };
+      } else {
+        newVentas = newVentas.filter((doc) => doc.price >= filter.minPrice);
+      }
+    }
+
+    if (filter.maxPrice > 0 || maxPrice > 0) {
+      if (maxPrice > 0) {
+        newVentas = newVentas.filter((doc) => doc.price <= maxPrice);
+        newFilter = { ...filter, maxPrice: maxPrice };
+      } else {
+        newVentas = newVentas.filter((doc) => doc.price <= filter.maxPrice);
+      }
+    }
+
+    if (category) {
+      newVentas = newVentas.filter((doc) => doc.category === category);
+      newFilter = { ...filter, category: category };
+    } else if (category === false) {
+      newFilter = { ...filter, category: null };
+    } else {
+      if (filter.category) {
+        newVentas = newVentas.filter((doc) => doc.category === filter.category);
+      }
+    }
+
+    if (subCategory) {
+      newVentas = newVentas.filter((doc) => doc.subCategory === subCategory);
+      newFilter = { ...filter, subCategory: subCategory };
+    } else if (subCategory === false) {
+      newFilter = { ...filter, subCategory: null };
+    } else {
+      if (filter.subCategory) {
+        newVentas = newVentas.filter(
+          (doc) => doc.subCategory === filter.subCategory
+        );
+      }
+    }
+
+    if (city) {
+      let newCity = filter.city.slice();
+      if (newCity.includes(city)) {
+        newCity = newCity.filter((location) => location !== city);
+      } else {
+        newCity.push(city);
+      }
+      if (newCity.length) {
+        let i = 0;
+        let newfilterCity = [];
+        while (i < newCity.length) {
+          let list = newVentas.slice();
+          list = list.filter((doc) => doc.city === newCity[i]);
+          newfilterCity = newfilterCity.concat(list);
+          i++;
+        }
+        newVentas = newfilterCity;
+      }
+
+      newFilter = { ...filter, city: newCity };
+    } else {
+      if (filter.city.length) {
+        let i = 0;
+        let newfilterCity = [];
+        while (i < filter.city.length) {
+          let list = newVentas.slice();
+          list = list.filter((doc) => doc.city === filter.city[i]);
+          newfilterCity.concat(list);
+          i++;
+        }
+        newVentas = newfilterCity;
+      }
+    }
+
+    setFilter(newFilter);
+    setVentas(newVentas);
+  }
+  //-------------
   return (
     <section ref={refSerchSection} className="desplegeFilter">
-      <FilterSection showFilter={showFilter} />
+      <FilterSection
+        filter={filter}
+        showFilter={showFilter}
+        filterResult={filterResult}
+      />
       <OrderBar
         nameOrder={nameOrder}
         setNameOrden={setNameOrden}
