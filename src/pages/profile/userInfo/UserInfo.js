@@ -96,6 +96,17 @@ export const UserInfo = ({ user, hiddeData }) => {
       }).catch(() => {
         return;
       });
+      if (user.data.itemsForSale.length) {
+        const city = { city: newData.city };
+        user.data.itemsForSale.forEach((element) => {
+          updateData({
+            name: "Ventas",
+            uid: element,
+            data: city,
+          });
+        });
+      }
+      //espacio para funcion canbia city
 
       await updateHiddeData({ uid: user.data.uid, data: newHiddeData }).then(
         () => {
