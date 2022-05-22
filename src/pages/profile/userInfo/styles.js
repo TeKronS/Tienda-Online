@@ -54,6 +54,7 @@ export const DataDiv = styled.div`
     height: 28px;
     margin-right: 10px;
     width: 100%;
+    max-width: 232px;
     border: 1px solid;
     border-radius: 2px;
   }

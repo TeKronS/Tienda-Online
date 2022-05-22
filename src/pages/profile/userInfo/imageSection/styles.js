@@ -7,7 +7,6 @@ export const ImageContainer = styled.div`
   height: 200px;
   justify-self: center;
   img {
-    /* opacity: 0.5; */
     overflow: hidden;
     object-fit: cover;
     margin: auto;

@@ -16,10 +16,16 @@ export const BottomInput = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 3px;
   visibility: visible;
+  border-radius: 3px;
+  background: rgba(31, 118, 83, 0.98);
   cursor: pointer;
+  :hover {
+    background: #135841;
+    color: white;
+  }
 `;
 
 export const Input = styled.input`
