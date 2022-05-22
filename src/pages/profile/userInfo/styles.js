@@ -50,6 +50,13 @@ export const DataDiv = styled.div`
     height: 20px;
     margin-right: 10px;
   }
+  select {
+    height: 28px;
+    margin-right: 10px;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 2px;
+  }
 `;
 
 export const DivText = styled.div`

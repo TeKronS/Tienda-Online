@@ -1,10 +1,10 @@
 import { DataDiv, DivText } from "./styles";
 import { InputWhitRules } from "./../../../Components/Input/InputWhitRules";
-
+import { CitysSelect } from "./../../../Components/CitysSelect/CitysSelect";
 const expresiones = {
   usuario: /^[a-zA-Z0-9_-]{4,16}$/, // Letras, numeros, guion y guion_bajo
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-  telefono: /^\++?\d{9,14}$/ // 9 a 14 numeros.,
+  telefono: /^\++?\d{9,14}$/, // 9 a 14 numeros.,
 };
 
 export const EditInputs = ({ user, hiddeData, data }) => {
@@ -27,14 +27,15 @@ export const EditInputs = ({ user, hiddeData, data }) => {
         />
       </DivText>
       <DivText>
-        <InputWhitRules
+        <CitysSelect estado={data.ciudad} cambiarEstado={data.setCiudad} />
+        {/* <InputWhitRules
           type="text"
           placeholder={user.data.city}
           name="Ciudad"
           expresionRegular={expresiones.nombre}
           estado={data.ciudad}
           cambiarEstado={data.setCiudad}
-        />
+        /> */}
       </DivText>
       <DivText>
         <InputWhitRules
