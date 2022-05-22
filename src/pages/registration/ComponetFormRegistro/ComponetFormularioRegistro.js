@@ -10,7 +10,7 @@ import {
   MensajeError,
   BoXSelect,
 } from "./StylesElementRegistro.js";
-import { CitysSelect } from "../../../Components/StatesSelect/CitysSelect";
+import { CitysSelect } from "../../../Components/CitysSelect/CitysSelect";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ComponenteInput } from "./InputRegistro";
