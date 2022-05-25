@@ -28,7 +28,7 @@ export const SaleDoc = ({ user }) => {
 
   const description = doc ? doc.description.match(/([^\r\n]+|\n|\r\n)/g) : 0;
   function comprar() {
-    alert("Funcion no Disponible");
+    alert("Función no Disponible");
   }
   return !doc ? (
     <SaleDocBody>
