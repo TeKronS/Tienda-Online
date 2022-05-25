@@ -66,6 +66,12 @@ export const DataDocBody = styled.section`
     background: yellowgreen;
     height: auto;
     min-height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    :hover {
+      background: rgba(31, 118, 83, 1);
+      color: white;
+    }
   }
   @media screen and (max-width: 600px) {
     grid-row-start: 2;
