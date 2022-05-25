@@ -53,6 +53,14 @@ export const Info = styled.div`
   .facebook {
     background: #1877f2;
   }
+  .portafolio {
+    background: #1d1d1d;
+    height: 54px;
+    /* background: white; */
+    svg {
+      color: white;
+    }
+  }
 `;
 
 export const LinkImg = styled.a`
@@ -63,6 +71,7 @@ export const LinkImg = styled.a`
   border-radius: 999px;
   top: 2px;
   right: 0;
+
   img {
     justify-self: center;
     margin: auto;

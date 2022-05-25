@@ -1,6 +1,7 @@
 import { BodyInfoBanner, Title, Info, LinkImg, Text, Name } from "./styles";
 import iconFB from "./../../../img/fb_icon_325x325.png";
-import IconGit from "./../../../img/Github.png";
+import iconGit from "./../../../img/Github.png";
+import iconPortafolio from "./../../../img/Portafolio.svg";
 
 export const BannerInfo = () => {
   return (
@@ -19,7 +20,7 @@ export const BannerInfo = () => {
             href="https://github.com/TeKronS/"
             target={"blank"}
           >
-            <img height={55} alt="" src={IconGit} />
+            <img height={55} alt="" src={iconGit} />
           </LinkImg>
         </div>
       </Info>
@@ -37,15 +38,15 @@ export const BannerInfo = () => {
         </div>
       </Info>
       <Info>
-        <span className="label">GitHub: </span>
+        <span className="label">Portafolio: </span>
         <div className="content">
-          <Text>Codigo del Proyecto</Text>
+          <Text>Información Profesional</Text>
           <LinkImg
-            className="git"
+            className="portafolio"
             href="https://github.com/TeKronS/"
             target={"blank"}
           >
-            <img height={55} alt="" src={IconGit} />
+            <img height={41} alt="" src={iconPortafolio} />
           </LinkImg>
         </div>
       </Info>
