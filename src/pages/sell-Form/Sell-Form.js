@@ -65,8 +65,10 @@ export const SellForm = ({ user }) => {
     isEnableButtonNext();
   }
   function amountChanged(e) {
-    content.current.amount = e.target.value;
-    isEnableButtonNext();
+    if (e.target.value > 0) {
+      content.current.amount = e.target.value;
+      isEnableButtonNext();
+    }
   }
   function stateChanged(e) {
     content.current.state = e.target.id;
@@ -289,6 +291,7 @@ export const SellForm = ({ user }) => {
               placeholder={"Cantidad"}
               type={"number"}
               onChange={amountChanged}
+              min={1}
             />
           </BoxAmount>
 

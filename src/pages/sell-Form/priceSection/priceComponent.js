@@ -6,8 +6,10 @@ export const PriceComponent = ({ priceChanged, keyPress }) => {
   const [price, setPrice] = useState(0);
   function onPriceChanged(e) {
     const value = e.target.value;
-    setPrice(value);
-    priceChanged(value);
+    if (value > 0) {
+      setPrice(value);
+      priceChanged(value);
+    }
   }
   return (
     <BoxPrice onKeyPress={keyPress}>
