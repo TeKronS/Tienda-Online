@@ -27,7 +27,9 @@ export const SaleDoc = ({ user }) => {
   }, [user, docId]);
 
   const description = doc ? doc.description.match(/([^\r\n]+|\n|\r\n)/g) : 0;
-
+  function comprar() {
+    alert("Funcion no Disponible");
+  }
   return !doc ? (
     <SaleDocBody>
       <Title className={"box"}></Title>
@@ -68,7 +70,7 @@ export const SaleDoc = ({ user }) => {
             <span>Envio Gratis </span>
           </span>
         </div>
-        <button>COMPRAR</button>
+        <button onClick={comprar}>COMPRAR</button>
       </DataDocBody>
       <DescriptionDocBody className={"box"}>
         <h3>Descripción</h3>
