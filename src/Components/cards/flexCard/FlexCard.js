@@ -6,7 +6,7 @@ export const FlexCard = ({ data, area }) => {
     <BodyCard style={{ gridArea: `area${area + 1}` }}>
       <Img loading={"lazy"} alt="" src={data.imgURL[0]} />
       <Title className="title">
-        <Link to={`/Sale/${data.id}`} />
+        <Link to={`/Tienda-Online/Sale/${data.id}`} />
         <span>{data.title}</span>
       </Title>
       <Price className="price">

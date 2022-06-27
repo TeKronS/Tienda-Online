@@ -14,7 +14,7 @@ export const Profile = ({ user }) => {
 
   useEffect(() => {
     if (!user.data) {
-      history.push("/Login");
+      history.push("/Tienda-Online/Login");
       return;
     }
     findHiddenUserData(user.data).then((response) => {

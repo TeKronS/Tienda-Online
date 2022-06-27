@@ -5,7 +5,7 @@ export const PopularCard = ({ data }) => {
     <BodyCard className="box">
       {data && (
         <>
-          <Link to={`/Sale/${data.id}`} />
+          <Link to={`/Tienda-Online/Sale/${data.id}`} />
           <ImageContainer>
             <img alt="" src={data.imgURL[0]}></img>
           </ImageContainer>

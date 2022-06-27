@@ -9,7 +9,7 @@ export const Login = ({ logIn, userLogin }) => {
   let history = useHistory();
   const RefButton = useRef(null);
   useEffect(() => {
-    if (userLogin) history.push("/");
+    if (userLogin) history.push("/Tienda-Online");
   }, [userLogin]);
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
@@ -61,8 +61,8 @@ export const Login = ({ logIn, userLogin }) => {
         <Button ref={RefButton}>Ingresar</Button>
       </form>
 
-      <Link to="/RestorePass">Recuperar contraseña</Link>
-      <Link to="/SingIn">Crear cuenta</Link>
+      <Link to="/Tienda-Online/RestorePass">Recuperar contraseña</Link>
+      <Link to="/Tienda-Online/SingIn">Crear cuenta</Link>
     </BodyInputLogin>
   );
 };
