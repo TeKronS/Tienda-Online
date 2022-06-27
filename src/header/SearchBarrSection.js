@@ -9,9 +9,7 @@ export const SerchBarrComponent = () => {
   const location = useLocation();
 
   const [query, setQuery] = useState(
-    location.pathname.includes("/Tienda-Online/Query")
-      ? location.pathname.substr(7)
-      : ""
+    location.pathname.includes("/Query") ? location.pathname.substr(7) : ""
   );
   let history = useHistory();
 
@@ -29,7 +27,7 @@ export const SerchBarrComponent = () => {
   }
 
   function serch() {
-    if (query) history.push(`/Tienda-Online/Query/${query}`);
+    if (query) history.push(`/Query/${query}`);
   }
 
   return (

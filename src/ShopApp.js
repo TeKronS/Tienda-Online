@@ -83,7 +83,7 @@ export const ShopApp = () => {
           <Route path="/Query/:docId">
             <SerchSales titles={titles} />
           </Route>
-          <Route path="/">
+          <Route path="/Tienda-Online/">
             <Home user={user} />
             <Footer />
           </Route>

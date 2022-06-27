@@ -212,14 +212,12 @@ export const SerchSales = ({ titles }) => {
                     loading={"lazy"}
                     height={"150"}
                   />
-                  <Link to={`/Tienda-Online/Sale/${data.id}`} />
+                  <Link to={`/Sale/${data.id}`} />
                 </ItemSerchImgContainer>
 
                 <TextItemContainer>
                   <h3>
-                    <Link
-                      to={`/Tienda-Online/Sale/${data.id}`}
-                    >{`${data.title}`}</Link>
+                    <Link to={`/Sale/${data.id}`}>{`${data.title}`}</Link>
                   </h3>
                   <p>
                     Precio: <span>{`$${data.price}`}</span>

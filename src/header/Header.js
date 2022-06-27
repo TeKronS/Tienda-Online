@@ -70,7 +70,7 @@ export const Header = ({ user, logOut }) => {
   return (
     <HeaderShop id={"header"} ref={refHeader}>
       <Logo>
-        <Link to="/Tienda-Online">
+        <Link to="/">
           <img alt={""} src={logo} />
         </Link>
       </Logo>
@@ -80,14 +80,14 @@ export const Header = ({ user, logOut }) => {
         <BurgerComponent burgerClick={burgerClick} />
         {!user ? (
           <ButonLogin ref={refBoxUser} className={"menu"}>
-            <Link to="/Tienda-Online/LogIn">Iniciar</Link>
-            <Link to="/Tienda-Online/SingIn">Registrarse</Link>
+            <Link to="/LogIn">Iniciar</Link>
+            <Link to="/SingIn">Registrarse</Link>
           </ButonLogin>
         ) : (
           <BoxUser ref={refBoxUser} className={"menu"}>
             <Options>
-              <Link to="/Tienda-Online/Profile">Perfil</Link>
-              <Link onClick={logOut} to="/Tienda-Online/Sales">
+              <Link to="/Profile">Perfil</Link>
+              <Link onClick={logOut} to="/Sales">
                 Desconectar
               </Link>
             </Options>
@@ -100,8 +100,8 @@ export const Header = ({ user, logOut }) => {
         )}
       </UserSection>
       <NavigationBarr>
-        {user && <Link to="/Tienda-Online/Sell">VENDER</Link>}
-        <Link to="/Tienda-Online">HOME</Link>
+        {user && <Link to="/Sell">VENDER</Link>}
+        <Link to="/">HOME</Link>
       </NavigationBarr>
     </HeaderShop>
   );

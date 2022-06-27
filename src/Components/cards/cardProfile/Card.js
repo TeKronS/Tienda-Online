@@ -21,7 +21,7 @@ export const Card = ({ doc, deleteFunction }) => {
     <Item className={"box"}>
       <DeleteButton onClick={deleteCard}>Eliminar</DeleteButton>
       <Title>
-        <Link to={`/Tienda-Online/Sale/${doc.id}`}>{doc.title}</Link>
+        <Link to={`/Sale/${doc.id}`}>{doc.title}</Link>
         <span>{doc.price} USD</span>
       </Title>
       <Img>

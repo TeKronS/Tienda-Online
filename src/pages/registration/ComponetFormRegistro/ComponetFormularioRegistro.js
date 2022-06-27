@@ -31,13 +31,13 @@ export const RegistrationForm = ({ user }) => {
 
   useEffect(() => {
     if (user) {
-      history.push("/Tienda-Online");
+      history.push("/");
     }
   });
 
   //---
   function redirect() {
-    history.push("/Tienda-Online/Login");
+    history.push("/Login");
   }
   //--
   const refButtom = useRef(null);
