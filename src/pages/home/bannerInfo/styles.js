@@ -57,9 +57,6 @@ export const Info = styled.div`
     background: #1d1d1d;
     height: 54px;
     /* background: white; */
-    svg {
-      color: white;
-    }
   }
 `;
 
