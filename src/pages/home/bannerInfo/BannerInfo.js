@@ -43,7 +43,7 @@ export const BannerInfo = () => {
           <Text>Información Profesional</Text>
           <LinkImg
             className="portafolio"
-            href="https://github.com/TeKronS/"
+            href="https://tekrons.github.io/Portafolio-1/"
             target={"blank"}
           >
             <img height={41} alt="" src={iconPortafolio} />
