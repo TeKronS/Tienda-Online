@@ -2,7 +2,6 @@
   "name": "tienda-online",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tekrons.github.io/Tienda-Online",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
@@ -33,8 +32,6 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/TeKronS/Tienda-Online",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
